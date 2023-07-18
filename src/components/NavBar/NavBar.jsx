@@ -1,38 +1,39 @@
-import { NavLink } from "react-router-dom";
+import * as userService from '../../utilities/usersService'
+
+import { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './NavBar.css'
-import { useState, useEffect } from "react";
-
 
 export default function NavBar({ user, setUser }) {
+    const navigate = useNavigate()
+
+    function logout() {
+        userService.logOut()
+        navigate(`/`)
+        setUser(null)
+    }
 
     return (
         <>
-            Nav Bar
-            {/* <nav>
+            <nav>
                 <span>
-                <NavLink to="/">TA-O</NavLink>    
+                <NavLink to="/">Fridgify</NavLink>    
                 </span>
                 &nbsp; | &nbsp;            
                 <span>
-                FUTURE SEARCH BAR
+                <NavLink to="/recipes">Possible Recipes</NavLink>  
                 </span>
                 &nbsp; | &nbsp;            
                 <span>
-                {user && <p> Welcome, {user.name}</p>}
+                <NavLink to="/grocerylist">Restock List</NavLink>  
                 &nbsp; | &nbsp; 
-                <DropdownButton id="dropdown-basic-button" title="Profile">
-                    <Dropdown.Item onClick={handleShow}>Log In</Dropdown.Item>
-                    <Dropdown.Item>Sign Up</Dropdown.Item>
-                    <Dropdown.Item>Help</Dropdown.Item>
-                    {user && <Dropdown.Item>LogOut</Dropdown.Item>}
-                </DropdownButton>
+                    <button onClick={logout}>LogOut</button>
                 </span>
-                <MyModal show={showModal} handleClose={handleClose} handleShow={handleShow}/>
-            </nav> */}
+            </nav>
         </>
-
     );
 }
