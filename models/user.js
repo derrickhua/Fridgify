@@ -13,23 +13,17 @@ const userSchema = new Schema({
       lowercase: true,
       required: true
     },
+    phoneNumber: {
+      type: Number,
+      trim: true
+    },
     password: {
       type: String,
       trim: true,
       minLength: 3,
       required: true
     },
-    description: {
-      type: String
-    },
-    profileImg: {
-      type: [String],
-      // Default: set an array with an img linked to default
-    },
-    isSeller: {
-      type: Boolean,
-      required: true
-    }
+
 }, {
     timestamps: true,
     toJSON: {

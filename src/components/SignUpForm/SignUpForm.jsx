@@ -5,6 +5,7 @@ export default class SignUpForm extends Component {
     state = {
         name: '',
         email: '',
+        phoneNumber: '',
         password: '',
         confirm: '',
         error: '',
@@ -21,17 +22,15 @@ export default class SignUpForm extends Component {
 
     handleSubmit = async (evt) => {
         evt.preventDefault();
-        // take our state data
+        console.log(this.state)
         try {
-        // send it to db
-        // wait for a response back
-        // update the 'user' state
           const formData = {...this.state}
           delete formData.error
           delete formData.confirm 
           const user = await signUp(formData)
           this.props.setUser(user)
         } catch(err){
+          console.log(err)
           this.setState({error: "Sign Up Failed - Try again"})
         }
     }
@@ -40,12 +39,15 @@ export default class SignUpForm extends Component {
         const disable = this.state.password !== this.state.confirm;
         return (
           <div>
+            <h1>Sign Up</h1>   
             <div className="form-container">
               <form autoComplete="off" onSubmit={this.handleSubmit}>
                 <label>Name</label>
                 <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
                 <label>Email</label>
                 <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                <label>Phone #</label>
+                <input type="number" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} required />
                 <label>Password</label>
                 <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
                 <label>Confirm</label>
