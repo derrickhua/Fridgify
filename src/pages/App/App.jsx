@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { getUser } from '../../utilities/usersService';
+
+// API 
+import * as itemAPI from '../../utilities/itemsApi'
+
 // Pages
 import AuthPage from '../AuthPage/AuthPage';
 import FridgePage from '../FridgePage/FridgePage'
@@ -14,7 +18,12 @@ import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [items, setItems] = useState([])
 
+  const getItems = useCallback(async ()=> {
+    const items = await itemAPI.getAll()
+    setItems(items)
+  }, [])
 
   return (
     <main className="App">
@@ -24,7 +33,7 @@ export default function App() {
       { user &&
       <>
         <Routes>
-          <Route path="/" element={<FridgePage />} /> 
+          <Route path="/" element={<FridgePage items={items} getItems={getItems}/>} /> 
           <Route path="/recipes" element={<RecipePage />} /> 
           <Route path="/grocerylist" element={<RestockPage />} /> 
         </Routes>          
@@ -35,7 +44,3 @@ export default function App() {
   );
 }
 
-        {/* {showForm.login && <button onClick={changeForm}>Sign Up</button>}
-        {showForm.signUp && <button onClick={changeForm}>Login</button>}
-        {showForm.signUp && <AuthPage setUser={setUser}/>}
-        {showForm.login && <LoginForm setUser={setUser}/>} */}

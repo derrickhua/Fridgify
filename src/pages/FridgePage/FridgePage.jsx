@@ -1,9 +1,19 @@
+import { useEffect } from "react";
+import ItemForm from "../../components/ItemForm/ItemForm";
+
+export default function FridgePage({items, getItems}) {
+    
+    useEffect(()=> {
+        getItems()
+        console.log(items)
+    }, [])
 
 
-export default function FridgePage() {
     return (
         <>
-            <h1>hello welcome to your currently empty FridgePage</h1>
+            
+            <ItemForm />
         </>
         );
   }
+
