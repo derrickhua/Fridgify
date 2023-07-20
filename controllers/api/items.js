@@ -24,6 +24,7 @@ async function create(req, res) {
     try {
         req.body.user = req.user._id
         const newItem = await Items.create(req.body);
+        
         res.json(newItem);
     } catch(err) {
         console.log(err)

@@ -1,51 +1,45 @@
 import { useState } from "react";
 import * as itemAPI from '../../utilities/itemsApi'
 
-export default function ItemForm({getItems}) {
-    const [newItem, setNewItem] = useState({
-        name: '',
-        expiryDate: '',
-        inFridge: true,
-        amountOfItem: 'High',
-        category: 'Sauces'
+export default function ItemForm({specificItem, getItems, setSpecificItem}) {
+    const [newEditItem, setNewEditItem] = useState({
+        name: specificItem.name,
+        expiryDate: specificItem.expiryDate,
+        inFridge: specificItem.inFridge,
+        amountOfItem: specificItem.amountOfItem,
+        category: specificItem.category
     })
-    const [error, setError] = useState('')
+
+
+    const [updateError, setUpdateError] = useState('')
     
     function handleChange(evt) {
-        setNewItem({ ...newItem, [evt.target.name]: evt.target.value });
-        setError('');
+        setNewEditItem({ ...newEditItem, [evt.target.name]: evt.target.value });
+        setUpdateError('');
     }
     
     async function handleSubmit(evt) {
         evt.preventDefault();
-        // console.log(newItem)
         try {
-          const item = await itemAPI.makeItem(newItem);
-          setNewItem({
-            name: '',
-            expiryDate: '',
-            inFridge: '',
-            amountOfItem: '',
-            category: ''
-          })
-          console.log(item)
-          getItems()
+            await itemAPI.updateItem(specificItem._id, newEditItem);
+            getItems()
+            setSpecificItem(null)
         } catch {
-          setError('New Item Making Failed - Try Again');
+            setUpdateError('New Item Making Failed - Try Again');
         }
     }
 
   return (
     <div>
-        <h1>New Item!</h1>   
+        <h1>Edit Item!</h1>   
             <div>
                 <form autoComplete="off" onSubmit={handleSubmit}>
                     <label>Name</label>
-                    <input type="text" name="name" value={newItem.name} onChange={handleChange} required />
+                    <input type="text" name="name" value={newEditItem.name} onChange={handleChange} required />
                     <label>Expiry Date</label>
-                    <input type="date" name="expiryDate" value={newItem.expiryDate} onChange={handleChange} />
+                    <input type="date" name="expiryDate" value={newEditItem.expiryDate} onChange={handleChange} />
                     <label>Choose a Category:</label>
-                    <select name='category' value={newItem.category} onChange={handleChange} required>
+                    <select name='category' value={newEditItem.category} onChange={handleChange} required>
                         <option value="Sauces">Sauces</option>
                         <option value="Drinks">Drinks</option>
                         <option value="Dairy Products">Dairy Products</option>
@@ -55,20 +49,20 @@ export default function ItemForm({getItems}) {
                         <option value="Miscellaneous">Miscellaneous</option>
                     </select>
                     <label>Amount of Item</label>
-                    <select name='amountOfItem' value={newItem.amountOfItem} onChange={handleChange} required>
+                    <select name='amountOfItem' value={newEditItem.amountOfItem} onChange={handleChange} required>
                         <option value="High">High</option>
                         <option value="Medium">Medium</option>
                         <option value="Low">Low</option>
                     </select>
                     <label>Location</label>
-                    <select name='inFridge' value={newItem.inFridge} onChange={handleChange} required>
+                    <select name='inFridge' value={newEditItem.inFridge} onChange={handleChange} required>
                         <option value={true}>Fridge</option>
                         <option value={false}>Pantry</option>
                     </select>
                     <button type="submit">Put Item in Inventory</button>
                 </form>
             </div>
-        <p className="error-message">&nbsp;{error}</p>
+        <p className="error-message">&nbsp;{updateError}</p>
     </div>
   );
 }

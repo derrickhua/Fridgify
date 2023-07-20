@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { getUser } from '../../utilities/usersService';
 
@@ -18,12 +18,16 @@ import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState()
 
-  const getItems = useCallback(async ()=> {
+  async function getItems() {
     const items = await itemAPI.getAll()
     setItems(items)
-  }, [])
+  }
+  
+  useEffect(()=> {
+    getItems()
+}, [user])
 
   return (
     <main className="App">
