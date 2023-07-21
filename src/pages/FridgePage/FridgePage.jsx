@@ -36,7 +36,7 @@ export default function FridgePage({items, getItems}) {
 
             Edit Item Here 
             {specificItem && <ItemUpdateForm specificItem={specificItem} getItems={getItems} setSpecificItem={setSpecificItem}/>}
-
+        
         </>
         );
   }

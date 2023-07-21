@@ -26,7 +26,9 @@ export default function App() {
   }
   
   useEffect(()=> {
-    getItems()
+    if(user) {
+      getItems()
+    }
 }, [user])
 
   return (
@@ -38,7 +40,7 @@ export default function App() {
       <>
         <Routes>
           <Route path="/" element={<FridgePage items={items} getItems={getItems}/>} /> 
-          <Route path="/recipes" element={<RecipePage />} /> 
+          <Route path="/recipes" element={<RecipePage items={items}/>} /> 
           <Route path="/grocerylist" element={<RestockPage />} /> 
         </Routes>          
       </>
