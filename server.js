@@ -2,12 +2,10 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const scheduler = require('./config/scheduler.js')
 
 require('dotenv').config();
 require('./config/database');
-
-let user, item, category, order;
-let users, items, categories, orders;
 
 const app = express();
 
@@ -21,10 +19,14 @@ app.use(require('./config/checkToken'));
 
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/items', require('./routes/api/items'));
+app.use('/api/reminders', require('./routes/api/reminder.js'));
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+// checking expiry dates every minute
+scheduler.start()
 
 const port = process.env.PORT || 3001;
 

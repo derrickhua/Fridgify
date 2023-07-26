@@ -24,6 +24,7 @@ export default function LoginForm({ setUser }) {
       // payload of the JSON Web Token (JWT)
       const user = await usersService.login(credentials);
       setUser(user);
+      console.log(user)
     } catch {
       setError('Log In Failed - Try Again');
     }

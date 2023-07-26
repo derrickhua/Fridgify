@@ -6,7 +6,7 @@ module.exports = {
     create,
     login,
     checkToken,
-
+    // one day work on deleteUser
   };
   
   async function create(req, res) {

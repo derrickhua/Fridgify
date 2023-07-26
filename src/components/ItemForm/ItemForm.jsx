@@ -1,7 +1,13 @@
 import { useState } from "react";
 import * as itemAPI from '../../utilities/itemsApi'
+const moment = require('moment')
 
 export default function ItemForm({getItems}) {
+    // const name = req.body.name;
+    // const phoneNumber = req.body.phoneNumber;
+    // const notification = req.body.notification;
+    // const timeZone = req.body.timeZone;
+    // const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
     const [newItem, setNewItem] = useState({
         name: '',
         expiryDate: '',
@@ -9,6 +15,10 @@ export default function ItemForm({getItems}) {
         amountOfItem: 'High',
         category: 'Sauces'
     })
+    const [reminder, setReminder] = useState({
+
+    })
+
     const [error, setError] = useState('')
     
     function handleChange(evt) {
@@ -20,7 +30,7 @@ export default function ItemForm({getItems}) {
         evt.preventDefault();
         // console.log(newItem)
         try {
-          const item = await itemAPI.makeItem(newItem);
+          const item = await itemAPI.makeItem(newItem)
           setNewItem({
             name: '',
             expiryDate: '',

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as itemAPI from "../../utilities/itemsApi"
 
 export default function RecipePage({items}) {
-    let currentInventory = []
+    const [currentInventory, setInventory] = useState([])
     const [apiParams, setApiParams] = useState({
       ingredients: '',
       number: '5',
@@ -14,18 +14,18 @@ export default function RecipePage({items}) {
     const [possibleRecipes, setRecipes] = useState([])
     useEffect(()=>{
       if(items) {
-        currentInventory = items.map((item) => item.name)
+        let inv = items.map((item) => item.name)
+        setInventory(inv)
       }
       setApiParams({...apiParams,
         ingredients: currentInventory.join(',')
       })
-
-      console.log(possibleRecipes)
-    },[items, possibleRecipes])
+    },[items])
 
     async function recipes(){
       let recs = await itemAPI.getRecipes(apiParams)
       setRecipes(recs)
+      console.log(possibleRecipes)
     }
 
     return <>
