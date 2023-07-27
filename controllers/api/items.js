@@ -9,7 +9,6 @@ module.exports = {
 
 async function index(req, res) {
     let items = []
-
     try {
         // find all items that user owns
         items = await Items.find({user: req.user._id}).sort('category').exec()

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import * as itemAPI from '../../utilities/itemsApi'
+import * as remAPI from '../../utilities/reminderApi'
 const moment = require('moment')
-
+const momentTimeZone = require('moment-timezone')
 export default function ItemForm({getItems}) {
-    // const name = req.body.name;
-    // const phoneNumber = req.body.phoneNumber;
-    // const notification = req.body.notification;
-    // const timeZone = req.body.timeZone;
-    // const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
+    const getTimeZone = function() {
+        return moment.tz.guess()
+    };
+
     const [newItem, setNewItem] = useState({
         name: '',
         expiryDate: '',
@@ -15,9 +15,7 @@ export default function ItemForm({getItems}) {
         amountOfItem: 'High',
         category: 'Sauces'
     })
-    const [reminder, setReminder] = useState({
 
-    })
 
     const [error, setError] = useState('')
     
@@ -28,20 +26,29 @@ export default function ItemForm({getItems}) {
     
     async function handleSubmit(evt) {
         evt.preventDefault();
-        // console.log(newItem)
         try {
-          const item = await itemAPI.makeItem(newItem)
-          setNewItem({
-            name: '',
-            expiryDate: '',
-            inFridge: '',
-            amountOfItem: '',
-            category: ''
-          })
-          console.log(item)
-          getItems()
-        } catch {
-          setError('New Item Making Failed - Try Again');
+            const item = await itemAPI.makeItem(newItem)
+            // this will set the alerttime to one day before expiry date at 8 am
+            let alertTime = moment(new Date(newItem.expiryDate)).set('hour', 8).set('minute', 0).toDate()
+            let newRem = {
+                name: newItem.name,
+                notification: '1',
+                timeZone: getTimeZone(),
+                time: alertTime
+            }
+            const rem = await remAPI.makeRem(newRem)
+            console.log(rem)
+            setNewItem({
+                name: '',
+                expiryDate: '',
+                inFridge: true,
+                amountOfItem: 'High',
+                category: 'Sauces'
+            })
+            getItems()
+        } catch(err) {
+            console.log(err)
+            setError('New Item Making Failed - Try Again');
         }
     }
 

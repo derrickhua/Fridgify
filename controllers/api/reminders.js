@@ -1,4 +1,4 @@
-const momentTimeZone = require('moment-timezone');
+
 const moment = require('moment');
 const Reminder = require('../../models/reminder')
 
@@ -9,9 +9,7 @@ module.exports = {
     deleteReminder
 }
 
-const getTimeZones = function() {
-  return momentTimeZone.tz.names();
-};
+
 
 // GET: /reminders
 async function index(req, res, next) {
@@ -35,6 +33,8 @@ async function createPage(req, res, next) {
 async function create(req, res, next) {
     try {
         const newReminder = await Reminder.create(req.body)
+        newReminder.phoneNumber = `${req.user.phoneNumber}`
+        newReminder.save()
         res.json(newReminder)
     } catch(err){
         console.log(err)
@@ -43,47 +43,24 @@ async function create(req, res, next) {
 }
 
 // GET: /reminders/:id/edit // get specific Reminder
-router.get('/:id/edit', function(req, res, next) {
-  const id = req.params.id;
-  Reminder.findOne({_id: id})
-    .then(function(reminder) {
-      res.render('reminders/edit', {timeZones: getTimeZones(),
-                                       reminder: reminder});
-    });
-});
-
-// POST: /reminders/:id/edit
-router.post('/:id/edit', function(req, res, next) {
-  const id = req.params.id;
-  const name = req.body.name;
-  const phoneNumber = req.body.phoneNumber;
-  const notification = req.body.notification;
-  const timeZone = req.body.timeZone;
-  const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
-
-  Reminder.findOne({_id: id})
-    .then(function(reminder) {
-      reminder.name = name;
-      reminder.phoneNumber = phoneNumber;
-      reminder.notification = notification;
-      reminder.timeZone = timeZone;
-      reminder.time = time;
-
-      reminder.save()
-        .then(function() {
-          res.redirect('/');
-        });
-    });
-});
+async function update(req, res, next) {
+  try {
+    let updateItem = await Reminder.findByIdAndUpdate(req.params.id, req.body)
+    updateItem.save()
+    res.json(updateItem)
+  } catch(err) {
+    console.log(err)
+    res.status(400).json(err)
+  }
+}
 
 // POST: /reminders/:id/delete
-router.post('/:id/delete', function(req, res, next) {
-  const id = req.params.id;
-
-  Reminder.remove({_id: id})
-    .then(function() {
-      res.redirect('/');
-    });
-});
-
-module.exports = router;
+async function deleteReminder(req, res, next) {
+  try {
+    let deletedRem = await Reminder.findByIdAndDelete(req.params.id)
+    res.json(deletedRem)
+  } catch(err){
+    console.log(err)
+    res.status(400).json(err)
+  }
+}

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const moment = require('moment');
+const moment = require('moment-timezone');
+
 const Twilio = require('twilio');
 
 const ReminderSchema = new Schema({
@@ -30,8 +31,8 @@ ReminderSchema.statics.sendNotifications = function(callback) {
       .find()
       .then(function(reminders) {
         reminders = reminders.filter(function(reminder) {
-                return reminder.requiresNotification(searchDate);
-        });
+                return reminder.requiresNotification(searchDate)
+        })
         if (reminders.length > 0) {
           sendNotifications(reminders);
         } else {
@@ -47,11 +48,12 @@ ReminderSchema.statics.sendNotifications = function(callback) {
       function sendNotifications(reminders) {
           const client = new Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
           reminders.forEach(function(reminder) {
+                console.log(reminder)
               // Create options to send the message
               const options = {
-                  to: `+ ${reminder.phoneNumber}`,
-                  from: process.env.TWILIO_PHONE_NUMBER,
-                  body: `Hi ${reminder.name}. Just a reminder to throw out an item.`,
+                  to: `+ 1${reminder.phoneNumber}`,
+                  from: `${process.env.TWILIO_PHONE_NUMBER}`,
+                  body: `Hi. Just a reminder to throw out ${reminder.name}`,
               };
   
               // Send the message!
