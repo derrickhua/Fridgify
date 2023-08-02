@@ -24,10 +24,31 @@ export default function AuthPage({setUser}) {
 
     return (
         <>
-    
-            {showForm.signUp && <SignUpForm setUser={setUser}/>}
-            {showForm.login && <LoginForm setUser={setUser} />}
-            <button onClick={changeForm}>{showForm.signUp ? 'Login' : 'SignUp'}</button>
+            <div className='logoArea'>
+              <img className='logo' src='../../fridgifylogo2.svg'/>
+              <h1 className='authPageTitle'>FRIDGIFY</h1>
+            </div>
+            <div className='middleSegment'>
+
+            <div className='commercialSegment'>
+              <div>
+                <h2>YOUR FOOD</h2>
+                <h2>MANAGEMENT APP</h2>
+                <br/>
+
+                <h4>Keep track of your food and find new recipes</h4>
+                <h4> using what you have in stock.</h4>                
+              </div>
+            </div>
+            <div className='authSegment'>
+                <div className='formContainer'>
+                  {showForm.signUp && <SignUpForm setUser={setUser}/>}
+                  {showForm.login && <LoginForm setUser={setUser} />}
+                  <button className="mainButton" onClick={changeForm}>{showForm.signUp ? 'Login' : 'SignUp'}</button>              
+                </div>
+            </div>
+            </div>
+           
         </>
         )
     
