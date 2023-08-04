@@ -83,6 +83,7 @@ export default function ItemForm({getItems, toggleItemForm, show }) {
                 <option value="Meat, Seafood, Eggs">Meat, Seafood, Eggs</option>
                 <option value="Fruits, Vegetables, Mushrooms">Fruits, Vegetables, Mushrooms</option>
                 <option value="Frozen">Frozen</option>
+                <option value="Oils, Spices">Oils, Spices</option>
                 <option value="Miscellaneous">Miscellaneous</option>
             </Form.Select>
           </Form.Group>

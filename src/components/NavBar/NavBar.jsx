@@ -23,13 +23,12 @@ export default function NavBar({ user, setUser }) {
                 <span className='inLine'>
                     <img className='smallerLogo ' src='../../fridgifylogo2.svg'/>
                     <NavLink className="navCompanyTitle" to="/">FRIDGIFY</NavLink>    
-                    &nbsp; <div className='vertLine'></div> &nbsp;            
+                    &nbsp;&nbsp;            
                     <NavLink className="navLinks" to="/">HOME</NavLink>  
                     &nbsp; <div className='vertLine'></div> &nbsp;            
                     <NavLink className="navLinks" to="/recipes">RECIPES</NavLink>  
                     &nbsp; <div className='vertLine'></div> &nbsp;            
-                    <NavLink className="navLinks" to="/grocerylist">RESTOCK</NavLink>  
-                    &nbsp; <div className='vertLine'></div> &nbsp;                     
+                    <NavLink className="navLinks" to="/grocerylist">RESTOCK</NavLink>                   
                 </span>
                 <span className='inLine'>
                 <p className='helpBtn'>HELP</p>
