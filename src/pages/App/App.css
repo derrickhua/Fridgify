@@ -28,6 +28,10 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     font-size: 1.5em;
 }
 
+.maxWidth {
+    width: 100%;
+}
+
 /* Top of Auth Page Logo Title Area */
 .logoArea {
     display: flex;

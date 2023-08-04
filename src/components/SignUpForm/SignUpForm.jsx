@@ -38,7 +38,7 @@ export default function SignUpForm({setUser, changeForm, showForm}) {
     const disable = suState.password !== suState.confirm;
     return (
       <div className='formContainer signUpFormContainer'>
-          <div>
+          <div className="maxWidth">
             <h5 className='noBotMargin'>Sign Up</h5> 
             <p>Enter your details below.</p> 
 
@@ -54,7 +54,7 @@ export default function SignUpForm({setUser, changeForm, showForm}) {
                 <input className='inputFormat lowerMargin' type="password" name="password" value={suState.password} onChange={handleChange} required /><br/>
                 <label>Confirm Password</label><br/>
                 <input className='inputFormat ' type="password" name="confirm" value={suState.confirm} onChange={handleChange} required />
-                <button className='buttonBegone lessMargin' onClick={changeForm}>{showForm.signUp ? 'Have an account? Sign in!' : 'No account? Sign up!'}</button><br />
+                <p className='buttonBegone lessMargin' onClick={changeForm}>{showForm.signUp ? 'Have an account? Sign in!' : 'No account? Sign up!'}</p><br />
                 <button className="mainButton" type="submit" disabled={disable}>SIGN UP</button>
               </form>
             </div>

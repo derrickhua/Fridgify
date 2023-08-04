@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import * as itemAPI from '../../utilities/itemsApi'
+import * as remAPI from '../../utilities/reminderApi'
 import * as THREE from 'three'
 import ItemForm from "../../components/ItemForm/ItemForm";
 import ItemUpdateForm from "../../components/ItemUpdateForm/ItemUpdateForm"
@@ -8,17 +9,25 @@ import Experience from "../../components/Experience/Experience"
 
 export default function FridgePage({items, getItems}) {
 
-    const [specificItem, setSpecificItem] = useState()
-    const [deleteError, setDeleteError] = useState('')
+    // const [deleteError, setDeleteError] = useState('')
     const [modalShow, setModalShow] = useState(false)
-    async function deleteClass(id){
+    const [categories, setCategories] = useState({
+        'Sauces':[],
+        'Drinks':[], 
+        'Dairy Products':[], 
+        'Frozen':[],
+        'Meat, Seafood, Eggs':[], 
+        'Fruits, Vegetables, Mushrooms':[], 
+        'Miscellaneous':[]
+    })
+
+    async function deleteClass([remId, classId]){
         try {
-            await itemAPI.deleteItem(id);
-            setSpecificItem(null)
+            await remAPI.deleteRem(remId)
+            await itemAPI.deleteItem(classId);
             getItems()
         } catch {
             console.log('itemDeleteFailed')
-            setDeleteError('Item Delete Failed - Try Again');
         }
     }
     
@@ -29,14 +38,21 @@ export default function FridgePage({items, getItems}) {
             setModalShow(true)
         }
     }
-    let itemShow = ''
-    if (items) {
-        itemShow = items.map((item, idx) => <div key={idx} className='itemDisplay'>
-                <p className="noBotMargin">{item.name}</p>
-                {/* <button onClick={()=>setSpecificItem(item)}>Edit This Item</button> */}
-                <button className='delBtn' onClick={()=>deleteClass(item._id)}>X</button>
-            </div>)
-    }
+
+    useEffect(()=> {
+        if (items) {
+            items.forEach((item) => {
+                let tempArr = categories[`${item.category}`]
+                if (!(item in tempArr)) {
+                    tempArr.push(item)
+                }
+                
+                setCategories({...categories, [`${item.category}`]: tempArr})
+            })
+        }   
+             
+    }, [items])
+
     return (
         <>
             <div className="fridgePage">
@@ -61,16 +77,12 @@ export default function FridgePage({items, getItems}) {
                 </div>
                 <div className="inventorySegment">
                 Fridge STUFF
-                {itemShow}
 
                 {/* Edit Item Here 
                 {specificItem && <ItemUpdateForm specificItem={specificItem} getItems={getItems} setSpecificItem={setSpecificItem}/>} */}
                             
                 </div>                
             </div>
-
-            
-
         </>
         );
   }

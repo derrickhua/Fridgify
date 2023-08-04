@@ -30,25 +30,27 @@ export default function ItemForm({getItems, toggleItemForm, show }) {
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
-            const item = await itemAPI.makeItem(newItem)
-            // this will set the alerttime to one day before expiry date at 8 am
-            let alertTime = moment(new Date(newItem.expiryDate)).set('hour', 8).set('minute', 0).toDate()
-            let newRem = {
-                name: newItem.name,
-                notification: '1',
-                timeZone: getTimeZone(),
-                time: alertTime
-            }
-            const rem = await remAPI.makeRem(newRem)
-            console.log(rem)
-            setNewItem({
-                name: '',
-                expiryDate: '',
-                inFridge: true,
-                amountOfItem: 'High',
-                category: 'Sauces'
-            })
-            getItems()
+          // this will set the alerttime to one day before expiry date at 8 am
+          let alertTime = moment(new Date(newItem.expiryDate)).set('hour', 8).set('minute', 0).toDate()
+          let newRem = {
+            name: newItem.name,
+            notification: '1',
+            timeZone: getTimeZone(),
+            time: alertTime
+          }
+          const rem = await remAPI.makeRem(newRem)
+          let currentItem = newItem
+          currentItem['reminder'] = rem._id
+          const item = await itemAPI.makeItem(currentItem)
+          console.log(item)
+          setNewItem({
+              name: '',
+              expiryDate: '',
+              inFridge: true,
+              amountOfItem: 'High',
+              category: 'Sauces',
+          })
+          getItems()
         } catch(err) {
             console.log(err)
             setError('New Item Making Failed - Try Again');

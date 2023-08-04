@@ -9,7 +9,8 @@ const itemSchema = new Schema({
     category: {type:String, required: true, 
         enum: ['Sauces', 'Drinks', 'Dairy Products', 'Frozen',
         'Meat, Seafood, Eggs', 'Fruits, Vegetables, Mushrooms', 'Miscellaneous']},
-    user: {type: Schema.Types.ObjectId, ref: 'User', required: true}    
+    user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+    reminder: {type: String, required: true}  
 }, {
         timestamps: true,
 })

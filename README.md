@@ -1,3 +1,6 @@
-# MERN-Stack Infrastructure
+# Fridgify
 
-Clone this repo to provide the starter code for a comprehensive MERN-Stack project including token-based authentication.
+Make food management easier with Fridgify.
+Keep track of the freshness of your ingredients.
+Get suggested new and exciting recipes to upgrade your palette.
+
