@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import * as usersService from '../../utilities/usersService';
 
-export default function LoginForm({ setUser }) {
+export default function LoginForm({ setUser, changeForm, showForm }) {
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -31,18 +31,26 @@ export default function LoginForm({ setUser }) {
   }
 
   return (
-    <div>
-        <h1>Login</h1>    
-      <div className="form-container">
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input type="text" name="email" value={credentials.email} onChange={handleChange} required />
-          <label>Password</label>
-          <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
-          <button className="mainButton" type="submit">LOG IN</button>
-        </form>
+    <div className='formContainer'>
+      <div className='loginForm'>
+        <div>
+            <h5 className='noBotMargin'>Sign In</h5> 
+            <p >Enter your details below.</p>           
+        </div>
+
+        <div>
+          <form autoComplete="off" onSubmit={handleSubmit}>
+            <label>Email</label><br />
+            <input className='inputFormat moreMargin' type="text" name="email" value={credentials.email} onChange={handleChange} required /><br />
+            <label>Password</label><br />
+            <input className='inputFormat' type="password" name="password" value={credentials.password} onChange={handleChange} required /><br />
+            <button className='buttonBegone moreMargin' onClick={changeForm}>{showForm.signUp ? 'Have an account? Sign in!' : 'No account? Sign up!'}</button><br />
+            <button className="mainButton" type="submit">SIGN IN</button>
+          </form>
+        </div>
+        {error && <p className="error-message">&nbsp;{error}</p>}
       </div>
-      <p className="error-message">&nbsp;{error}</p>
     </div>
+
   );
 }

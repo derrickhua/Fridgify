@@ -4,10 +4,11 @@ import { useState } from "react";
 
 export default function AuthPage({setUser}) {
     const [showForm, setShowForm] = useState({
-        signUp: true,
-        login: false,
+        signUp: false,
+        login: true,
       })
       function changeForm(){
+        console.log('yes it was clicked')
         if (showForm.signUp) {
           setShowForm({
             signUp: false,
@@ -41,11 +42,9 @@ export default function AuthPage({setUser}) {
               </div>
             </div>
             <div className='authSegment'>
-                <div className='formContainer'>
-                  {showForm.signUp && <SignUpForm setUser={setUser}/>}
-                  {showForm.login && <LoginForm setUser={setUser} />}
-                  <button className="mainButton" onClick={changeForm}>{showForm.signUp ? 'Login' : 'SignUp'}</button>              
-                </div>
+                  {showForm.signUp && <SignUpForm setUser={setUser} changeForm={changeForm} showForm={showForm}/>}
+                  {showForm.login && <LoginForm setUser={setUser} changeForm={changeForm} showForm={showForm}/>}
+                        
             </div>
             </div>
            

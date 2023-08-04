@@ -1,9 +1,12 @@
 import { useState } from "react";
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import * as itemAPI from '../../utilities/itemsApi'
 import * as remAPI from '../../utilities/reminderApi'
+
 const moment = require('moment')
 const momentTimeZone = require('moment-timezone')
-export default function ItemForm({getItems}) {
+export default function ItemForm({getItems, toggleItemForm, show }) {
     const getTimeZone = function() {
         return moment.tz.guess()
     };
@@ -53,40 +56,60 @@ export default function ItemForm({getItems}) {
     }
 
   return (
-    <div>
-        <h1>New Item!</h1>   
-            <div>
-                <form autoComplete="off" onSubmit={handleSubmit}>
-                    <label>Name</label>
-                    <input type="text" name="name" value={newItem.name} onChange={handleChange} required />
-                    <label>Expiry Date</label>
-                    <input type="date" name="expiryDate" value={newItem.expiryDate} onChange={handleChange} />
-                    <label>Choose a Category:</label>
-                    <select name='category' value={newItem.category} onChange={handleChange} required>
-                        <option value="Sauces">Sauces</option>
-                        <option value="Drinks">Drinks</option>
-                        <option value="Dairy Products">Dairy Products</option>
-                        <option value="Meat, Seafood, Eggs">Meat, Seafood, Eggs</option>
-                        <option value="Fruits, Vegetables, Mushrooms">Fruits, Vegetables, Mushrooms</option>
-                        <option value="Frozen">Frozen</option>
-                        <option value="Miscellaneous">Miscellaneous</option>
-                    </select>
-                    <label>Amount of Item</label>
-                    <select name='amountOfItem' value={newItem.amountOfItem} onChange={handleChange} required>
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
-                    </select>
-                    <label>Location</label>
-                    <select name='inFridge' value={newItem.inFridge} onChange={handleChange} required>
-                        <option value={true}>Fridge</option>
-                        <option value={false}>Pantry</option>
-                    </select>
-                    <button type="submit">Put Item in Inventory</button>
-                </form>
-            </div>
-        <p className="error-message">&nbsp;{error}</p>
-    </div>
+    <Modal show={show} onHide={toggleItemForm} className="itemFormFontColor">
+    <Modal.Header closeButton>
+      <h3 className="itemFormTitle">Add a new item!</h3>
+    </Modal.Header>
+    <Modal.Body className="itemForm">  
+      <div>
+        <div>
+          <Form autoComplete="off" onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Label>Name</Form.Label>
+            <Form.Control className='lowerMargin'type="text" name="name" value={newItem.name} onChange={handleChange} required />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Expiry Date</Form.Label>
+            <Form.Control className='lowerMargin' type="date" name="expiryDate" value={newItem.expiryDate} onChange={handleChange} required />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Choose a Category:</Form.Label>
+            <Form.Select className='lowerMargin'  name="category" value={newItem.category} onChange={handleChange} required>
+                <option value="Sauces">Sauces</option>
+                <option value="Drinks">Drinks</option>
+                <option value="Dairy Products">Dairy Products</option>
+                <option value="Meat, Seafood, Eggs">Meat, Seafood, Eggs</option>
+                <option value="Fruits, Vegetables, Mushrooms">Fruits, Vegetables, Mushrooms</option>
+                <option value="Frozen">Frozen</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Amount of Item </Form.Label>
+            <Form.Select className='lowerMargin' name="amountOfItem" value={newItem.amountOfItem} onChange={handleChange} required>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Location</Form.Label>
+            <Form.Select name="inFridge" value={newItem.inFridge} onChange={handleChange}  className="moreMargin"required>
+                <option value={true}>Fridge</option>
+                <option value={false}>Pantry</option>
+            </Form.Select>
+          </Form.Group>
+
+          <span>
+            <button className='itemBtn'type="submit">Put Item in Inventory</button>
+          </span>
+          
+        </Form>
+        </div>
+        {error && <p className="error-message">&nbsp;{error}</p>}
+      </div>
+    </Modal.Body>
+  </Modal>
   );
 }
 

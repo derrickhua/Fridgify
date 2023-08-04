@@ -19,19 +19,22 @@ export default function NavBar({ user, setUser }) {
 
     return (
         <>
-            <nav>
-                <span>
-                <NavLink to="/">Fridgify</NavLink>    
+            <nav className='navBar'>
+                <span className='inLine'>
+                    <img className='smallerLogo ' src='../../fridgifylogo2.svg'/>
+                    <NavLink className="navCompanyTitle" to="/">FRIDGIFY</NavLink>    
+                    &nbsp; <div className='vertLine'></div> &nbsp;            
+                    <NavLink className="navLinks" to="/">HOME</NavLink>  
+                    &nbsp; <div className='vertLine'></div> &nbsp;            
+                    <NavLink className="navLinks" to="/recipes">RECIPES</NavLink>  
+                    &nbsp; <div className='vertLine'></div> &nbsp;            
+                    <NavLink className="navLinks" to="/grocerylist">RESTOCK</NavLink>  
+                    &nbsp; <div className='vertLine'></div> &nbsp;                     
                 </span>
-                &nbsp; | &nbsp;            
-                <span>
-                <NavLink to="/recipes">Possible Recipes</NavLink>  
-                </span>
-                &nbsp; | &nbsp;            
-                <span>
-                <NavLink to="/grocerylist">Restock List</NavLink>  
-                &nbsp; | &nbsp; 
-                    <button onClick={logout}>LogOut</button>
+                <span className='inLine'>
+                <p className='helpBtn'>HELP</p>
+                &nbsp; <div className='vertLine'></div> &nbsp;  
+                <button className='logOutBtn' onClick={logout}>LOGOUT</button>
                 </span>
             </nav>
         </>

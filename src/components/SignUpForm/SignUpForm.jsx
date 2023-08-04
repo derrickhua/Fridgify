@@ -1,65 +1,67 @@
-import { Component } from "react";
+import { Component, useState } from "react";
 import { signUp } from '../../utilities/usersService'
 
-export default class SignUpForm extends Component {
-    state = {
-        name: '',
-        email: '',
-        phoneNumber: '',
-        password: '',
-        confirm: '',
-        error: '',
-    }
+export default function SignUpForm({setUser, changeForm, showForm}) {
+    const [suState, setState] = useState(
+      {
+          name: '',
+          email: '',
+          phoneNumber: '',
+          password: '',
+          confirm: '',
+      })
+    const [error, setError] = useState('');
+    
+
 
     // arrow functions will nwo refer to the SignUpForm
-    handleChange = (evt) => {
-        this.setState({
-            [evt.target.name]: evt.target.value,
-            error: ''
-            }
-        )
+    const handleChange = (evt) => {
+      setState({ ...suState, [evt.target.name]: evt.target.value });
+      setError('');
     }
 
-    handleSubmit = async (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
-        console.log(this.state)
+        console.log(suState)
         try {
-          const formData = {...this.state}
+          const formData = {...suState}
           delete formData.error
           delete formData.confirm 
           const user = await signUp(formData)
-          this.props.setUser(user)
+          setUser(user)
         } catch(err){
           console.log(err)
           this.setState({error: "Sign Up Failed - Try again"})
         }
     }
 
-    render() {
-        const disable = this.state.password !== this.state.confirm;
-        return (
+    const disable = suState.password !== suState.confirm;
+    return (
+      <div className='formContainer signUpFormContainer'>
           <div>
-            <p>Sign In</p> 
+            <h5 className='noBotMargin'>Sign Up</h5> 
             <p>Enter your details below.</p> 
-             
+
             <div className="form-container">
-              <form autoComplete="off" onSubmit={this.handleSubmit}>
-                <label>Name</label>
-                <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
-                <label>Email</label>
-                <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-                <label>Phone #</label>
-                <input type="number" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} required />
-                <label>Password</label>
-                <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-                <label>Confirm</label>
-                <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
+              <form autoComplete="off" onSubmit={handleSubmit}>
+                <label>Name</label><br/>
+                <input className='inputFormat lowerMargin' type="text" name="name" value={suState.name} onChange={handleChange} required /><br/>
+                <label>Email</label><br/>
+                <input className='inputFormat lowerMargin' type="email" name="email" value={suState.email} onChange={handleChange} required /><br/>
+                <label>Phone Number</label><br/>
+                <input className='inputFormat lowerMargin' type="number" name="phoneNumber" value={suState.phoneNumber} onChange={handleChange} required /><br/>
+                <label>Password</label><br/>
+                <input className='inputFormat lowerMargin' type="password" name="password" value={suState.password} onChange={handleChange} required /><br/>
+                <label>Confirm Password</label><br/>
+                <input className='inputFormat ' type="password" name="confirm" value={suState.confirm} onChange={handleChange} required />
+                <button className='buttonBegone lessMargin' onClick={changeForm}>{showForm.signUp ? 'Have an account? Sign in!' : 'No account? Sign up!'}</button><br />
                 <button className="mainButton" type="submit" disabled={disable}>SIGN UP</button>
               </form>
             </div>
-            <p className="error-message">&nbsp;{this.state.error}</p>
+            {error && <p className="error-message">&nbsp;{error}</p>}
           </div>
-        );
-      }      
+      </div>
+
+    )
 }
 

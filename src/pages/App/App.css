@@ -23,6 +23,9 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     background-color: rgb(245,242,223);
     border: none;
     border-radius: 6px;
+    height: 50px;
+    width: 100%;
+    font-size: 1.5em;
 }
 
 /* Top of Auth Page Logo Title Area */
@@ -66,8 +69,182 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
 .formContainer {
     border: solid 2px rgb(245,242,223);
     border-radius: 5px;
-    width: 80%;
-    max-width: 500px;
+    width: 90%;
+    max-width: 550px;
+    height: 40vh;
+    padding: 5% 9%;
+    display: flex;
+}
+
+/* Login Form*/
+
+.noBotMargin {
+    margin-bottom: 0px;
+}
+
+.inputFormat {
+    margin-top: 5px;
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 3px solid rgb(245,242,223);
+
+}
+
+.moreMargin {
+    margin-bottom: 50px;    
+}
+
+.loginForm {
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+}
+
+.buttonBegone {
+    border:none;
+    background-color: rgb(161,203,209);
+    color: rgb(245,242,223);
+    margin-bottom: 120px;
+}
+
+.lessMargin {
+    margin-bottom: 50px;    
+}
+
+.lowerMargin {
+    margin-bottom: 20px;
+}
+
+.buttonBegone:hover{
+    color: #fff;
+}
+
+.signUpFormContainer {
     height: 50vh;
-    padding: 3% 6%;
+}
+
+.mainButton:hover {
+    background-color: #fff;
+}
+
+/* NavBar */
+
+.navBar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.inLine {
+    display: flex;
+    align-items: center;
+}
+
+.smallerLogo {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    margin-top: 0px;
+}
+
+.navCompanyTitle {
+    font-size: 2em;
+    color: rgb(245,242,223);
+    text-decoration: none;
+    margin-right: 40px;
+}
+
+.navLinks {
+    font-size: 1em;
+    color: rgb(245,242,223);
+    text-decoration: none;
+    margin: 0px 10px;
+}
+
+.vertLine {
+    border-left: 0.5px solid rgba(245, 242, 223, 0.5);
+    height: 30px;
+}
+
+.logOutBtn {
+    font-size: 1em;
+    border:none;
+    background-color: rgb(161,203,209);
+    color: rgb(245,242,223);
+    margin: 0px 10px;
+}
+
+.helpBtn {
+    font-size: 1em;
+    margin: 0px 10px;
+}
+
+.navLinks:hover, .helpBtn:hover, .logOutBtn:hover, .navCompanyTitle:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Fridge Page*/
+
+.itemDisplay {
+    display: flex;
+    align-items: center;
+}
+
+.delBtn {
+    margin-left: 15px;;
+    border: none;
+    background-color: rgb(161,203,209);
+    color: red;
+}
+
+.itemFormFontColor{
+    color: rgb(161,203,209);
+}
+
+.modal-header,.modal-body {
+    background-color: rgb(245,242,223);
+}
+
+.itemBtn {
+    color: rgb(245,242,223);
+    border: none;
+    background-color: rgb(161,203,209);
+    border-radius: 6px;
+    height: 50px;
+    width: 100%;
+    font-size: 1.5em;
+}
+
+.itemBtn:hover {
+    background-color: #fff;
+    color: rgb(161,203,209);
+}
+
+.itemFormTitle {
+    font-size: 2em;
+    margin-bottom: 0px;
+}
+.modal-body {
+    border-radius: 10px;
+}
+
+.addBtn {
+    background-color: rgb(161,203,209);
+    color: rgb(245,242,223);
+    border: 1px solid rgb(245,242,223);
+    padding: 5px 30px;
+    border-radius: 5px;
+}
+
+.fridgePage {
+    display: flex;
+}
+
+.canvas {
+    height: 500px;
+    /* max-height: 700px; */
+    width: 400px;
 }

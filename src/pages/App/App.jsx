@@ -44,7 +44,6 @@ export default function App() {
           <Route path="/grocerylist" element={<RestockPage />} /> 
         </Routes>          
       </>
-
       }
     </main>
   );
