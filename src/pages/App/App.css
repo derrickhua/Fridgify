@@ -308,10 +308,13 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     display:block;
 }
 
+.theTable h5{
+    margin-bottom: 10px;
+}
 .theTable thead, .theTable tbody { display: block; }
 
 .theTable tbody {
-    height: 160px;      
+    height: 150px;      
     overflow-y: auto;   
     overflow-x: hidden;  
 }
@@ -339,5 +342,69 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     width: 10px;  
     background-color: rgb(161,203,209);   
     border-left: 4px rgb(245,242,223) solid; 
-      
+}
+
+.horizontalLine {
+    margin: 5px 0px;
+    width: 100%;
+    padding: 0;
+}
+
+.inlineSpan {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inlineSpan h5 {
+    margin-bottom: 5px;
+}
+
+.detailBtn {
+    background-color: rgb(161,203,209, 0);
+    color: rgb(161,203,209, 0);
+    border: none;
+    margin-bottom: 5px;
+}
+
+.detailImg {
+    width: 20px;
+}
+
+.detailImg:hover {
+    filter: brightness(0) invert(1);
+}
+
+.zoomTable {
+    width: 100%;
+    max-width: 900px;
+    height: 60vh;
+    padding: 60px;
+    background-color:  rgb(245,242,223);
+    color: rgb(161,203,209);
+    border-radius: 30px;
+}
+
+.zoomTable > .theTable > thead {
+    margin: 10px 0px;
+    font-size: 1.5em;
+}
+
+.zoomTable > .theTable > hr {
+    border-top: 3px rgb(161,203,209) solid; 
+}
+
+.zoomTable > .theTable > tbody {
+    font-size: 1.25em;
+    height: 550px;
+}
+
+.exitDetailBtn {
+    background-color: rgb(161,203,209, 0);
+    border: none;
+    font-size: 1.5em;
+    color: rgb(216, 72, 36);
+}
+
+.exitDetailBtn:hover {
+    color: #fff;
 }

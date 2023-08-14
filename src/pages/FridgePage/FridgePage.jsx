@@ -7,10 +7,12 @@ import ItemForm from "../../components/ItemForm/ItemForm";
 import ItemUpdateForm from "../../components/ItemUpdateForm/ItemUpdateForm"
 import Table from "../../components/Table/Table"
 import Experience from "../../components/Experience/Experience"
+import DetailComponent from "../../components/DetailComponent/DetailComponent";
 
 export default function FridgePage({items, getItems}) {
 
     // const [deleteError, setDeleteError] = useState('')
+    const [detailShow, setDetailShow] = useState()
     const [modalShow, setModalShow] = useState(false)
     const [categories, setCategories] = useState({
         'Sauces':[],
@@ -48,7 +50,6 @@ export default function FridgePage({items, getItems}) {
 
     useEffect(()=> {
 
-        
         if (items) {
             items.forEach((item) => {
                 let tempArr = categories[`${item.category}`]
@@ -62,7 +63,8 @@ export default function FridgePage({items, getItems}) {
         }   
         
         const cats = Object.keys(categories)
-        let tablets = cats.map((cat)=> <Table catName={cat} category={categories[cat]}/>)
+        let tablets = cats.map((cat)=> 
+        <Table catName={cat} category={categories[cat]} setDetailShow={setDetailShow}/>)
 
         setTables(tablets)
 
@@ -88,26 +90,39 @@ export default function FridgePage({items, getItems}) {
                     </div>
 
                     <button className='addBtn' onClick={toggleItemForm}>ADD</button>
-                    {modalShow && <ItemForm getItems={getItems} toggleItemForm={toggleItemForm} show={modalShow}/>}
+                    {modalShow && 
+                    <ItemForm getItems={getItems} toggleItemForm={toggleItemForm} show={modalShow}/>}
                 </div>
                 <div className="inventorySegment">
                 
-                
-                <div className="row1">
-                    {tables[0]}
-                    {tables[1]}
-                    {tables[2]}
-                </div>
-                <div className="row2">
-                    {tables[3]}
-                    {tables[4]}
-                    {tables[5]}
-                </div>
-                <div className="row3">
-                    {tables[6]}
-                    {tables[7]}
-                    <div className="spacer"></div>        
-                </div>
+                {
+                    !detailShow && 
+                    <>
+                        <div className="row1">
+                            {tables[0]}
+                            {tables[1]}
+                            {tables[2]}
+                        </div>
+                        <div className="row2">
+                            {tables[3]}
+                            {tables[4]}
+                            {tables[5]}
+                        </div>
+                        <div className="row3">
+                            {tables[6]}
+                            {tables[7]}
+                            <div className="spacer"></div>        
+                        </div>                    
+                    </>
+                }
+
+                {
+                    detailShow && 
+                    <>
+                    <DetailComponent catName={detailShow.catName} category={detailShow.category} setDetailShow={setDetailShow}/>
+                    </>
+                }
+
 
                 {/* Edit Item Here 
                 {specificItem && <ItemUpdateForm specificItem={specificItem} getItems={getItems} setSpecificItem={setSpecificItem}/>} */}

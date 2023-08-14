@@ -8,7 +8,6 @@ export default function AuthPage({setUser}) {
         login: true,
       })
       function changeForm(){
-        console.log('yes it was clicked')
         if (showForm.signUp) {
           setShowForm({
             signUp: false,

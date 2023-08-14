@@ -6,7 +6,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 // import Dropdown from 'react-bootstrap/Dropdown';
 // import DropdownButton from 'react-bootstrap/DropdownButton';
-import './NavBar.css'
 
 export default function NavBar({ user, setUser }) {
     const navigate = useNavigate()

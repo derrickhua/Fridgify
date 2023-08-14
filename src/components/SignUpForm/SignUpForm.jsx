@@ -22,7 +22,6 @@ export default function SignUpForm({setUser, changeForm, showForm}) {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        console.log(suState)
         try {
           const formData = {...suState}
           delete formData.error
