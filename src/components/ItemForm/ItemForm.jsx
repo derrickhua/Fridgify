@@ -42,7 +42,6 @@ export default function ItemForm({getItems, toggleItemForm, show }) {
           let currentItem = newItem
           currentItem['reminder'] = rem._id
           const item = await itemAPI.makeItem(currentItem)
-          console.log(item)
           setNewItem({
               name: '',
               expiryDate: '',

@@ -241,14 +241,103 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     border: 1px solid rgb(245,242,223);
     padding: 5px 30px;
     border-radius: 5px;
+    width: 100px;
+    margin: 0 auto;
 }
 
 .fridgePage {
     display: flex;
+    width: 100%;
+    height: 80vh;
 }
 
 .canvas {
-    height: 500px;
-    /* max-height: 700px; */
-    width: 400px;
+    height: 60%;
+    min-height: 500px;
+    max-height: 700px;
+    width: 80%;
+    min-width: 400px;
+    max-width: 650px;
+    
+}
+
+.modelSegment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.inventorySegment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 4;
+}
+
+.row1, .row2, .row3 {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: space-between;
+    height: 25vh;
+}
+
+.spacer {
+    width: 30%;
+    max-width: 350px;
+}
+
+/* category tables */
+.catTable {
+    width: 30%;
+    max-width: 350px;
+    height: 250px;
+    padding: 15px;
+    background-color:  rgb(245,242,223);
+    color: rgb(161,203,209);
+    border-radius: 30px;
+
+}
+
+.theTable {
+    width: 100%;
+    height: 200px;
+    display:block;
+}
+
+.theTable thead, .theTable tbody { display: block; }
+
+.theTable tbody {
+    height: 160px;      
+    overflow-y: auto;   
+    overflow-x: hidden;  
+}
+
+.tableRow {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.expDate {
+    margin-right: 17px;
+}
+
+.theTable tbody::-webkit-scrollbar {
+    width: 15px;        
+}
+
+.theTable tbody::-webkit-scrollbar-track {
+    width: 10px;   
+    background: rgb(245,242,223);       
+}
+
+.theTable tbody::-webkit-scrollbar-thumb {
+    width: 10px;  
+    background-color: rgb(161,203,209);   
+    border-left: 4px rgb(245,242,223) solid; 
+      
 }

@@ -19,11 +19,13 @@ export default function FridgePage({items, getItems}) {
         'Frozen':[],
         'Meat, Seafood, Eggs':[], 
         'Fruits, Vegetables, Mushrooms':[], 
+        'Oils, Spices':[],
         'Miscellaneous':[]
     })
     const [tables, setTables] = useState([])
 
-    // TODO: make useState for Accumulating Item Change Requests
+    // TODO: make useState for Accumulating Item Change Requests, low, med, high? 
+    // this gets to be confirmed if you leave category details page
     // TODO: remove duplicate change requests in the future
     // TODO: make expiry date optional / currently required in html form, if no expiry date no reminder
     async function deleteClass([remId, classId]){
@@ -45,17 +47,20 @@ export default function FridgePage({items, getItems}) {
     }
 
     useEffect(()=> {
+
+        
         if (items) {
             items.forEach((item) => {
                 let tempArr = categories[`${item.category}`]
-                if (!(item in categories[`${item.category}`])) {
+                let alreadyInCat = tempArr.find(itemIn => itemIn._id === item._id)
+                if (!(alreadyInCat)) {
                     tempArr.push(item)
                     setCategories({...categories, [`${item.category}`]: tempArr})
                 }
                 
             })
         }   
-        // for each set category make a list of tables
+        
         const cats = Object.keys(categories)
         let tablets = cats.map((cat)=> <Table catName={cat} category={categories[cat]}/>)
 
@@ -86,9 +91,23 @@ export default function FridgePage({items, getItems}) {
                     {modalShow && <ItemForm getItems={getItems} toggleItemForm={toggleItemForm} show={modalShow}/>}
                 </div>
                 <div className="inventorySegment">
-                Fridge STUFF
                 
-                {tables}
+                
+                <div className="row1">
+                    {tables[0]}
+                    {tables[1]}
+                    {tables[2]}
+                </div>
+                <div className="row2">
+                    {tables[3]}
+                    {tables[4]}
+                    {tables[5]}
+                </div>
+                <div className="row3">
+                    {tables[6]}
+                    {tables[7]}
+                    <div className="spacer"></div>        
+                </div>
 
                 {/* Edit Item Here 
                 {specificItem && <ItemUpdateForm specificItem={specificItem} getItems={getItems} setSpecificItem={setSpecificItem}/>} */}

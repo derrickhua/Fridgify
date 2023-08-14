@@ -1,23 +1,31 @@
 import { useEffect, useState } from "react";
 
 export default function Table({catName, category}) {
-    console.log(catName, category)
     return (
-        <table>
-            <h4>{catName}</h4>
-            <tr>
-            <th>Name</th>
-            <th>Exp. Date</th>
-            </tr>
-            {category.map((item,key)=> {
-            return (
-                    <tr key={key}>
-                        <td>{item.name}</td>
-                        <td>{item.expiryDate}</td>
-                    </tr>
-                    )
-            })}
-        </table>
+        <div className="catTable">
+            <table className="theTable">
+                <h5>{catName}</h5>
+                <thead>
+                    <tr className="tableRow">
+                        <th>Name</th>
+                        <th className="expDate">Exp. Date</th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    {category.map((item,key)=> {
+    
+                    return (
+                            <tr key={key} className="tableRow">
+                                <td>{item.name}</td>
+                                {console.log(item.expiryDate)}
+                                <td>{item.expiryDate.substring(0, 10)}</td>
+                            </tr>
+                            )
+                    })}                    
+                </tbody>
+
+            </table>
+        </div>
     );
 }        
 
