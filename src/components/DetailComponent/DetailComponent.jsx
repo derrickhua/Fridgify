@@ -1,18 +1,7 @@
 
 import { useEffect } from 'react';
-import * as itemAPI from '../../utilities/itemsApi'
-import * as remAPI from '../../utilities/reminderApi'
 
-export default function DetailComponent({catName, category, setDetailShow, getItems}) {
-    async function deleteClass([remId, classId]){
-        try {
-            await remAPI.deleteRem(remId)
-            await itemAPI.deleteItem(classId);
-            await getItems()
-        } catch {
-            console.log('itemDeleteFailed')
-        }
-    }
+export default function DetailComponent({catName, category, setDetailShow, deleteItems}) {
     useEffect(()=> {
         console.log(category)
     }, [category])
@@ -39,7 +28,7 @@ export default function DetailComponent({catName, category, setDetailShow, getIt
                                     <tr key={key} className="tableRow zoomRow">
                                         <td className='inlineTableRow'>
                                             {item.name}
-                                            <p className='deleteBtn' onClick={()=>deleteClass([item.reminder, item._id])}>X</p>
+                                            <p className='deleteBtn' onClick={()=>deleteItems([item.reminder, item._id])}>X</p>
                                         </td>
                                         <td>{item.expiryDate.substring(0, 10)}</td>
                                     </tr>

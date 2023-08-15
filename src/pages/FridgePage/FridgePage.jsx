@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from 'three'
+import * as itemAPI from '../../utilities/itemsApi'
+import * as remAPI from '../../utilities/reminderApi'
 import ItemForm from "../../components/ItemForm/ItemForm";
 import ItemUpdateForm from "../../components/ItemUpdateForm/ItemUpdateForm"
 import Table from "../../components/Table/Table"
@@ -29,6 +31,16 @@ export default function FridgePage({items, getItems}) {
     // TODO: remove duplicate change requests in the future
     // TODO: make expiry date optional / currently required in html form, if no expiry date no reminder
     
+    async function deleteItems([remId, classId]){
+        try {
+            await remAPI.deleteRem(remId)
+            await itemAPI.deleteItem(classId);
+            getItems()
+        } catch {
+            console.log('itemDeleteFailed')
+        }
+    }
+
     function toggleItemForm() {
         if(modalShow) {
             setModalShow(false)
@@ -131,7 +143,7 @@ export default function FridgePage({items, getItems}) {
                     detailShow && 
                     <>
                     <DetailComponent catName={detailShow.catName} category={detailShow.category} 
-                    setDetailShow={setDetailShow} getItems={getItems}/>
+                    setDetailShow={setDetailShow} deleteItems={deleteItems}/>
                     </>
                 }
 
