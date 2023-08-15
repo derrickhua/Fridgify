@@ -45,7 +45,8 @@ async function create(req, res, next) {
 // GET: /reminders/:id/edit // get specific Reminder
 async function update(req, res, next) {
   try {
-    let updateItem = await Reminder.findByIdAndUpdate(req.params.id, req.body)
+    let updateItem = await Reminder.findByIdAndUpdate(req.params.id, req.body, {returnDocument:'after'})
+    console.log(updateItem)
     updateItem.save()
     res.json(updateItem)
   } catch(err) {

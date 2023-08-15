@@ -30,6 +30,7 @@ export default function ItemForm({getItems, toggleItemForm, show }) {
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
+          toggleItemForm()
           // this will set the alerttime to one day before expiry date at 8 am
           let alertTime = moment(new Date(newItem.expiryDate)).set('hour', 8).set('minute', 0).toDate()
           let newRem = {

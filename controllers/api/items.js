@@ -33,7 +33,9 @@ async function create(req, res) {
 
 async function update(req, res) {
     try {
-        let changedItem = await Items.findByIdAndUpdate(req.params.id, req.body)
+        let options = {returnDocument:'after'}
+        let changedItem = await Items.findByIdAndUpdate(req.params.id, req.body, options)
+        console.log(changedItem)
         changedItem.save();
         res.json(changedItem);
     } catch(err) {

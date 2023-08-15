@@ -1,10 +1,8 @@
 
 import { useEffect } from 'react';
 
-export default function DetailComponent({catName, category, setDetailShow, deleteItems}) {
-    useEffect(()=> {
-        console.log(category)
-    }, [category])
+export default function DetailComponent({catName, category, setDetailShow, deleteItems, setEditItem}) {
+
     return ( 
         <div className="zoomTable">
             <table className="theTable">
@@ -28,6 +26,7 @@ export default function DetailComponent({catName, category, setDetailShow, delet
                                     <tr key={key} className="tableRow zoomRow">
                                         <td className='inlineTableRow'>
                                             {item.name}
+                                            <p className='deleteBtn' onClick={()=>setEditItem(item)}>Update</p>
                                             <p className='deleteBtn' onClick={()=>deleteItems([item.reminder, item._id])}>X</p>
                                         </td>
                                         <td>{item.expiryDate.substring(0, 10)}</td>

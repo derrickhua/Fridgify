@@ -18,11 +18,29 @@ import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-  const [items, setItems] = useState()
+  const [items, setItems] = useState({})
 
   async function getItems() {
     const items = await itemAPI.getAll()
-    setItems(items)
+    let realitems = turnIntoCategories(items)
+    setItems(realitems)
+  }
+
+  function turnIntoCategories(arr) {
+    let categories = {
+      'Sauces':[],
+      'Drinks':[], 
+      'Dairy Products':[], 
+      'Frozen':[],
+      'Meat, Seafood, Eggs':[], 
+      'Fruits, Vegetables, Mushrooms':[], 
+      'Oils, Spices':[],
+      'Miscellaneous':[]
+    }
+    // for each item in item array, push item into its specific category O(n) time
+    arr.forEach((item) => categories[item.category].push(item))
+
+    return categories
   }
   
   useEffect(()=> {

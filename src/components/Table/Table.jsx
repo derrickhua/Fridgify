@@ -24,12 +24,12 @@ export default function Table({catName, category, setDetailShow}) {
                 <tbody className="tableBody">
                     {category.map((item,key)=> {
     
-                    return (
-                            <tr key={key} className="tableRow">
-                                <td>{item.name}</td>
-                                <td>{item.expiryDate.substring(0, 10)}</td>
-                            </tr>
-                            )
+                        return (
+                                <tr key={key} className="tableRow">
+                                    <td>{item.name}</td>
+                                    <td>{item.expiryDate.substring(0, 10)}</td>
+                                </tr>
+                                )
                     })}                    
                 </tbody>
 

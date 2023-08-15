@@ -14,21 +14,14 @@ export default function FridgePage({items, getItems}) {
     // const [deleteError, setDeleteError] = useState('')
     const [detailShow, setDetailShow] = useState()
     const [modalShow, setModalShow] = useState(false)
-    const [categories, setCategories] = useState({
-        'Sauces':[],
-        'Drinks':[], 
-        'Dairy Products':[], 
-        'Frozen':[],
-        'Meat, Seafood, Eggs':[], 
-        'Fruits, Vegetables, Mushrooms':[], 
-        'Oils, Spices':[],
-        'Miscellaneous':[]
-    })
+    const [editItem, setEditItem] = useState(null)
     const [tables, setTables] = useState([])
 
     // TODO: make useState for Accumulating Item Change Requests, low, med, high? 
     // this gets to be confirmed if you leave category details page
+
     // TODO: remove duplicate change requests in the future
+
     // TODO: make expiry date optional / currently required in html form, if no expiry date no reminder
     
     async function deleteItems([remId, classId]){
@@ -49,48 +42,19 @@ export default function FridgePage({items, getItems}) {
         }
     }
 
-    useEffect(()=> {
-        // this resets the categories
-        setCategories({
-            'Sauces':[],
-            'Drinks':[], 
-            'Dairy Products':[], 
-            'Frozen':[],
-            'Meat, Seafood, Eggs':[], 
-            'Fruits, Vegetables, Mushrooms':[], 
-            'Oils, Spices':[],
-            'Miscellaneous':[]
-        })
-
-        if (items) {
-            items.forEach((item) => {
-                // set a temporary array to insert into object
-                let tempArr = categories[`${item.category}`]
-                // if not already in categories, this will be false
-                let alreadyInCat = tempArr.find(itemIn => itemIn._id === item._id)
-                // if false, add it to temporary array and then
-                if (!(alreadyInCat)) {
-                    tempArr.push(item)
-                    setCategories({...categories, [`${item.category}`]: tempArr})
-                }
-            })
-        }   
-        
-        const cats = Object.keys(categories)
+    useEffect( ()=> {
+        const cats = Object.keys(items)
         let tablets = cats.map((cat)=> 
-        <Table catName={cat} category={categories[cat]} setDetailShow={setDetailShow}/>)
+        <Table catName={cat} category={items[cat]} setDetailShow={setDetailShow}/>)
 
         setTables(tablets)
-        // once categories change, i need to reset detailShow
+
         if (detailShow) {
             setDetailShow({
                 ...detailShow,
-                ['category'] : categories[`${detailShow.catName}`]
+                ['category'] : items[`${detailShow.catName}`]
             })
-
-            console.log(detailShow)
         }
-
     }, [items])
 
     return (
@@ -115,6 +79,8 @@ export default function FridgePage({items, getItems}) {
                     <button className='addBtn' onClick={toggleItemForm}>ADD</button>
                     {modalShow && 
                     <ItemForm getItems={getItems} toggleItemForm={toggleItemForm} show={modalShow}/>}
+
+                    {editItem && <ItemUpdateForm editItem={editItem} getItems={getItems} setEditItem={setEditItem} show={editItem}/>}
                 </div>
                 <div className="inventorySegment">
                 
@@ -143,7 +109,7 @@ export default function FridgePage({items, getItems}) {
                     detailShow && 
                     <>
                     <DetailComponent catName={detailShow.catName} category={detailShow.category} 
-                    setDetailShow={setDetailShow} deleteItems={deleteItems}/>
+                    setDetailShow={setDetailShow} deleteItems={deleteItems} setEditItem={setEditItem}/>
                     </>
                 }
 
