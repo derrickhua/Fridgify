@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import * as itemAPI from '../../utilities/itemsApi'
-import * as remAPI from '../../utilities/reminderApi'
 import * as THREE from 'three'
 import ItemForm from "../../components/ItemForm/ItemForm";
 import ItemUpdateForm from "../../components/ItemUpdateForm/ItemUpdateForm"
@@ -30,15 +28,6 @@ export default function FridgePage({items, getItems}) {
     // this gets to be confirmed if you leave category details page
     // TODO: remove duplicate change requests in the future
     // TODO: make expiry date optional / currently required in html form, if no expiry date no reminder
-    async function deleteClass([remId, classId]){
-        try {
-            await remAPI.deleteRem(remId)
-            await itemAPI.deleteItem(classId);
-            getItems()
-        } catch {
-            console.log('itemDeleteFailed')
-        }
-    }
     
     function toggleItemForm() {
         if(modalShow) {
@@ -49,16 +38,29 @@ export default function FridgePage({items, getItems}) {
     }
 
     useEffect(()=> {
+        // this resets the categories
+        setCategories({
+            'Sauces':[],
+            'Drinks':[], 
+            'Dairy Products':[], 
+            'Frozen':[],
+            'Meat, Seafood, Eggs':[], 
+            'Fruits, Vegetables, Mushrooms':[], 
+            'Oils, Spices':[],
+            'Miscellaneous':[]
+        })
 
         if (items) {
             items.forEach((item) => {
+                // set a temporary array to insert into object
                 let tempArr = categories[`${item.category}`]
+                // if not already in categories, this will be false
                 let alreadyInCat = tempArr.find(itemIn => itemIn._id === item._id)
+                // if false, add it to temporary array and then
                 if (!(alreadyInCat)) {
                     tempArr.push(item)
                     setCategories({...categories, [`${item.category}`]: tempArr})
                 }
-                
             })
         }   
         
@@ -67,6 +69,15 @@ export default function FridgePage({items, getItems}) {
         <Table catName={cat} category={categories[cat]} setDetailShow={setDetailShow}/>)
 
         setTables(tablets)
+        // once categories change, i need to reset detailShow
+        if (detailShow) {
+            setDetailShow({
+                ...detailShow,
+                ['category'] : categories[`${detailShow.catName}`]
+            })
+
+            console.log(detailShow)
+        }
 
     }, [items])
 
@@ -119,7 +130,8 @@ export default function FridgePage({items, getItems}) {
                 {
                     detailShow && 
                     <>
-                    <DetailComponent catName={detailShow.catName} category={detailShow.category} setDetailShow={setDetailShow}/>
+                    <DetailComponent catName={detailShow.catName} category={detailShow.category} 
+                    setDetailShow={setDetailShow} getItems={getItems}/>
                     </>
                 }
 

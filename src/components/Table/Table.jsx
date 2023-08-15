@@ -1,6 +1,6 @@
 
 export default function Table({catName, category, setDetailShow}) {
-
+    
     return (
         <div className="catTable">
             <table className="theTable">

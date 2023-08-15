@@ -398,13 +398,32 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     height: 550px;
 }
 
+.theTable h1 {
+    display: inline;
+}
 .exitDetailBtn {
+    display: inline;
     background-color: rgb(161,203,209, 0);
     border: none;
     font-size: 1.5em;
     color: rgb(216, 72, 36);
 }
 
-.exitDetailBtn:hover {
+.exitDetailBtn:hover, .deleteBtn:hover {
     color: #fff;
+    cursor: pointer;
 }
+
+.zoomRow {
+    margin-bottom: 10px;
+}
+
+.deleteBtn {
+    margin-left: 20px;
+    color: rgb(216, 72, 36);
+}
+
+.inlineTableRow {
+    display: flex;
+}
+
