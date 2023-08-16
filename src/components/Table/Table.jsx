@@ -1,6 +1,6 @@
 
 export default function Table({catName, category, setDetailShow}) {
-    
+    let scrolling = category.length > 6
     return (
         <div className="catTable">
             <table className="theTable">
@@ -17,17 +17,19 @@ export default function Table({catName, category, setDetailShow}) {
                 <hr className="horizontalLine"/>
                 <thead>
                     <tr className="tableRow">
-                        <th>Name</th>
+                        <th className="nameCol">Name</th>
                         <th className="expDate">Exp. Date</th>
+                        <th></th>
                     </tr>                    
                 </thead>
                 <tbody className="tableBody">
                     {category.map((item,key)=> {
-    
+                        
                         return (
                                 <tr key={key} className="tableRow">
-                                    <td>{item.name}</td>
-                                    <td>{item.expiryDate.substring(0, 10)}</td>
+                                    <td className="nameCol">{item.name}</td>
+                                    <td className={scrolling ? "expCol" : ""}>{item.expiryDate.substring(0, 10)}</td>
+                                    <td></td>
                                 </tr>
                                 )
                     })}                    

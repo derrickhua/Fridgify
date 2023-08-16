@@ -14,7 +14,7 @@ export default function FridgePage({items, getItems}) {
     // const [deleteError, setDeleteError] = useState('')
     const [detailShow, setDetailShow] = useState()
     const [modalShow, setModalShow] = useState(false)
-    const [editItem, setEditItem] = useState(null)
+    const [queue, setQueue] = useState([])
     const [tables, setTables] = useState([])
 
     // TODO: make useState for Accumulating Item Change Requests, low, med, high? 
@@ -57,6 +57,8 @@ export default function FridgePage({items, getItems}) {
         }
     }, [items])
 
+    // another useEffect to iterate through queue and then update accordingly
+
     return (
         <>
             <div className="fridgePage">
@@ -80,7 +82,7 @@ export default function FridgePage({items, getItems}) {
                     {modalShow && 
                     <ItemForm getItems={getItems} toggleItemForm={toggleItemForm} show={modalShow}/>}
 
-                    {editItem && <ItemUpdateForm editItem={editItem} getItems={getItems} setEditItem={setEditItem} show={editItem}/>}
+                    {/* {editItem && <ItemUpdateForm editItem={editItem} getItems={getItems} setEditItem={setEditItem} show={editItem}/>} */}
                 </div>
                 <div className="inventorySegment">
                 
@@ -109,14 +111,12 @@ export default function FridgePage({items, getItems}) {
                     detailShow && 
                     <>
                     <DetailComponent catName={detailShow.catName} category={detailShow.category} 
-                    setDetailShow={setDetailShow} deleteItems={deleteItems} setEditItem={setEditItem}/>
+                    setDetailShow={setDetailShow} deleteItems={deleteItems} getItems={getItems}
+                    setQueue={setQueue}
+                    />
                     </>
                 }
-
-
-                {/* Edit Item Here 
-                {specificItem && <ItemUpdateForm specificItem={specificItem} getItems={getItems} setSpecificItem={setSpecificItem}/>} */}
-                            
+      
                 </div>                
             </div>
         </>

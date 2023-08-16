@@ -323,11 +323,17 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     display: flex;
     width: 100%;
     justify-content: space-between;
+    
 }
 
-.expDate {
-    margin-right: 17px;
+.nameCol {
+    width: 70px;
 }
+
+.expCol {
+    margin-left: 15px;
+}
+
 
 .theTable tbody::-webkit-scrollbar {
     width: 15px;        
@@ -366,6 +372,32 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     margin-bottom: 5px;
 }
 
+.detailName {
+    width: 150px;
+}
+
+
+.detailAmt{
+    width: 80px;
+    display: flex;
+}
+
+.detailExp {
+    width: 105px;
+}
+
+.solveMargin {
+    width: 60px;
+}
+
+.solveMarginMore {
+    width: 45px;
+}
+
+.detailDel {
+
+}
+
 .detailImg {
     width: 20px;
 }
@@ -387,6 +419,9 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
 .zoomTable > .theTable > thead {
     margin: 10px 0px;
     font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .zoomTable > .theTable > hr {
@@ -416,14 +451,14 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
 
 .zoomRow {
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
 }
 
 .deleteBtn {
-    margin-left: 20px;
     color: rgb(216, 72, 36);
 }
 
-.inlineTableRow {
-    display: flex;
-}
+
 

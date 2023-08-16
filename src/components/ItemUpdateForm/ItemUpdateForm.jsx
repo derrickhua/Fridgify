@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 
 const moment = require('moment')
 const momentTimeZone = require('moment-timezone')
-export default function ItemForm({editItem, getItems, setEditItem, show}) {
+export default function ItemUpdateForm({editItem, getItems, setEditItem, show}) {
     const [newEditItem, setNewEditItem] = useState({
         name: editItem.name,
         expiryDate: editItem.expiryDate.substring(0, 10),
