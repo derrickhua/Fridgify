@@ -2,8 +2,9 @@
 import { useEffect } from 'react';
 import * as itemAPI from '../../utilities/itemsApi'
 import * as remAPI from '../../utilities/reminderApi'
+import EditAmountForm from '../EditAmount/EditAmount';
 
-export default function DetailComponent({catName, category, setDetailShow, deleteItems, getItems}) {
+export default function DetailComponent({catName, category, setDetailShow, deleteItems, queue, setQ}) {
     let scrolling = category.length >= 10
     // instead of setting the edit item for the form create a request array here 
 
@@ -12,7 +13,7 @@ export default function DetailComponent({catName, category, setDetailShow, delet
             <table className="theTable">
                 <span className='inlineSpan'>
                     <h1>{catName}</h1>
-                    <button className='exitDetailBtn' onClick={()=> setDetailShow(null)}>X</button>                    
+                    <button className='exitDetailBtn' onClick={()=> {setDetailShow(null)}}>X</button>                    
                 </span>
 
                     
@@ -34,10 +35,7 @@ export default function DetailComponent({catName, category, setDetailShow, delet
                                             <div >{item.name}</div>
                                         </td>
                                         <td className='detailAmt'>
-                                                <p>---</p>
-                                                <p className='deleteBtn'> {item.amountOfItem} </p>  
-                                                <p>+</p> 
-
+                                            <EditAmountForm queue={queue} item={item} setQ={setQ}/>
                                         </td>
                                         <td className='detailExp'>{item.expiryDate.substring(0, 10)}</td>
                                         <td className='detailDel'><p className='deleteBtn' onClick={()=>deleteItems([item.reminder, item._id])}>X</p></td>

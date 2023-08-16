@@ -4,7 +4,6 @@ import * as THREE from 'three'
 import * as itemAPI from '../../utilities/itemsApi'
 import * as remAPI from '../../utilities/reminderApi'
 import ItemForm from "../../components/ItemForm/ItemForm";
-import ItemUpdateForm from "../../components/ItemUpdateForm/ItemUpdateForm"
 import Table from "../../components/Table/Table"
 import Experience from "../../components/Experience/Experience"
 import DetailComponent from "../../components/DetailComponent/DetailComponent";
@@ -12,15 +11,15 @@ import DetailComponent from "../../components/DetailComponent/DetailComponent";
 export default function FridgePage({items, getItems}) {
 
     // const [deleteError, setDeleteError] = useState('')
-    const [detailShow, setDetailShow] = useState()
+    const [detailShow, setDetailShow] = useState(null)
     const [modalShow, setModalShow] = useState(false)
-    const [queue, setQueue] = useState([])
+    const [queue, setQ] = useState([])
+
+    // when queue changes, look through it and delete queues that have the same id and same object
     const [tables, setTables] = useState([])
 
     // TODO: make useState for Accumulating Item Change Requests, low, med, high? 
     // this gets to be confirmed if you leave category details page
-
-    // TODO: remove duplicate change requests in the future
 
     // TODO: make expiry date optional / currently required in html form, if no expiry date no reminder
     
@@ -52,12 +51,38 @@ export default function FridgePage({items, getItems}) {
         if (detailShow) {
             setDetailShow({
                 ...detailShow,
-                ['category'] : items[`${detailShow.catName}`]
+                'category' : items[`${detailShow.catName}`]
             })
         }
+
     }, [items])
 
-    // another useEffect to iterate through queue and then update accordingly
+    useEffect(()=> {
+        let newQ = queue
+        let recentEntry = newQ[newQ.length-1]
+        for (let i=newQ.length-2; i>=0; i--) {
+            let currentEntry = newQ[i]
+            if (currentEntry[0] === recentEntry[0]) {
+                if (Object.keys(currentEntry[1])[0] === Object.keys(recentEntry[1])[0])
+                newQ.splice(i, 1)
+            }
+        }
+
+        setQ(newQ)
+        console.log('q is updating detailShow')
+    }, [queue])
+
+    useEffect(()=> {
+        if (queue.length) {
+            for (let query of queue) {
+                itemAPI.updateItem(query[0], query[1])
+            }
+            setQ([])
+            getItems()            
+        }
+
+        console.log('detailSHOWWWWWWWWW')
+    }, [detailShow])
 
     return (
         <>
@@ -112,7 +137,7 @@ export default function FridgePage({items, getItems}) {
                     <>
                     <DetailComponent catName={detailShow.catName} category={detailShow.category} 
                     setDetailShow={setDetailShow} deleteItems={deleteItems} getItems={getItems}
-                    setQueue={setQueue}
+                    setQ={setQ} queue={queue}
                     />
                     </>
                 }
