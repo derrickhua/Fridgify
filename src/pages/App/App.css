@@ -376,6 +376,10 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     width: 150px;
 }
 
+.detailName > div {
+    color: rgb(216, 149, 123);
+}
+
 
 .detailAmt{
     width: 80px;
@@ -385,6 +389,9 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
 
 .detailExp {
     width: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .solveMargin {
@@ -395,10 +402,12 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     width: 45px;
 }
 
-.detailDel {
+/* .detailDel {
 
+} */
+.betterTitle {
+    color: rgb(216, 149, 123);
 }
-
 .detailImg {
     width: 20px;
 }
@@ -458,7 +467,7 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
 }
 
 .deleteBtn {
-    color: rgb(216, 72, 36);
+    color: rgb(216, 149, 123);
 }
 
 /* EditAmount CSS */
@@ -471,9 +480,8 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
 .amtDisplay {
     margin-bottom: 0px;
     padding: 5px;
-    /* border-top: 2px rgb(161,203,209) dotted; */
-    border: 2px rgb(161,203,209) dotted;
     border-radius: 5px;
+    font-size: 0.85em;
 
 }
 
@@ -482,10 +490,22 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     background-color: rgba(161,203,209, 0);
     margin: 0 10px;
     font-size: 1.5em;
+    color: rgb(216, 149, 123);
 }
 
 .amtBtn:hover {
     color: white;
 }
 
+.expDisplay {
+    margin-bottom: 0px;
+}
+
+.nicerForm > input {
+    border: none;
+    background-color: rgb(245,242,223);
+    font-size: 0.85em;
+    color: rgb(161,203,209);
+    max-width: 120px;
+}
 

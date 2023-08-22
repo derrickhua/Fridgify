@@ -72,7 +72,7 @@ export default function ItemForm({getItems, toggleItemForm, show }) {
           </Form.Group>
           <Form.Group>
             <Form.Label>Expiry Date</Form.Label>
-            <Form.Control className='lowerMargin' type="date" name="expiryDate" value={newItem.expiryDate} onChange={handleChange} required />
+            <Form.Control className='lowerMargin' type="date" name="expiryDate" value={newItem.expiryDate} onChange={handleChange} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Choose a Category:</Form.Label>

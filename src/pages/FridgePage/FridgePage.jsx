@@ -13,15 +13,14 @@ export default function FridgePage({items, getItems}) {
     // const [deleteError, setDeleteError] = useState('')
     const [detailShow, setDetailShow] = useState(null)
     const [modalShow, setModalShow] = useState(false)
-    const [queue, setQ] = useState([])
-
-    // when queue changes, look through it and delete queues that have the same id and same object
+    const [itemQueue, setItemQ] = useState([])
+    const [remQueue, setRemQueue] = useState([])
+    // when itemQueue changes, look through it and delete itemQueues that have the same id and same object
     const [tables, setTables] = useState([])
 
+    // future? maybe?
     // TODO: make useState for Accumulating Item Change Requests, low, med, high? 
     // this gets to be confirmed if you leave category details page
-
-    // TODO: make expiry date optional / currently required in html form, if no expiry date no reminder
     
     async function deleteItems([remId, classId]){
         try {
@@ -58,7 +57,7 @@ export default function FridgePage({items, getItems}) {
     }, [items])
 
     useEffect(()=> {
-        let newQ = queue
+        let newQ = itemQueue
         let recentEntry = newQ[newQ.length-1]
         for (let i=newQ.length-2; i>=0; i--) {
             let currentEntry = newQ[i]
@@ -67,21 +66,39 @@ export default function FridgePage({items, getItems}) {
                 newQ.splice(i, 1)
             }
         }
-
-        setQ(newQ)
-        console.log('q is updating detailShow')
-    }, [queue])
+        setItemQ(newQ)
+    }, [itemQueue])
 
     useEffect(()=> {
-        if (queue.length) {
-            for (let query of queue) {
+        let q= remQueue
+        let recentEntry = q[q.length-1]
+        for (let i=q.length-2; i>=0; i--) {
+            let currentEntry = q[i]
+            if (currentEntry[0] === recentEntry[0]) {
+                if (Object.keys(currentEntry[1])[0] === Object.keys(recentEntry[1])[0])
+                q.splice(i, 1)
+            }
+        }
+        setRemQueue(q)
+    }, [remQueue])
+
+    useEffect(()=> {
+        if (itemQueue.length) {
+            for (let query of itemQueue) {
                 itemAPI.updateItem(query[0], query[1])
             }
-            setQ([])
+            setItemQ([])
             getItems()            
         }
 
-        console.log('detailSHOWWWWWWWWW')
+        if (remQueue.length) {
+            for (let query of remQueue) {
+                remAPI.updateRem(query[0], query[1])
+            }
+            setRemQueue([])
+            getItems()                
+        }
+
     }, [detailShow])
 
     return (
@@ -137,7 +154,7 @@ export default function FridgePage({items, getItems}) {
                     <>
                     <DetailComponent catName={detailShow.catName} category={detailShow.category} 
                     setDetailShow={setDetailShow} deleteItems={deleteItems} getItems={getItems}
-                    setQ={setQ} queue={queue}
+                    setItemQ={setItemQ} itemQueue={itemQueue} remQueue={remQueue} setRemQueue={setRemQueue}
                     />
                     </>
                 }

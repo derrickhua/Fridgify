@@ -28,7 +28,7 @@ export default function Table({catName, category, setDetailShow}) {
                         return (
                                 <tr key={key} className="tableRow">
                                     <td className="nameCol">{item.name}</td>
-                                    <td className={scrolling ? "expCol" : ""}>{item.expiryDate.substring(0, 10)}</td>
+                                    <td className={scrolling ? "expCol" : ""}>{item.expiryDate ? item.expiryDate.substring(0, 10) : '-'}</td>
                                     <td></td>
                                 </tr>
                                 )
