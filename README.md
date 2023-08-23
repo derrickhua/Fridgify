@@ -41,7 +41,7 @@ Fridgify is available to access ... (deployed via Vercel).
 7. Node.js
 8. Git
 9. Mongoose
-10. Vercel
+10. Heroku
 11. Twilio 
 
 ## Getting Started
