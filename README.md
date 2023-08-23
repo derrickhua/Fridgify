@@ -9,7 +9,7 @@ Future improvements coming such as new recipe generation using what you have!
 
 The Fridgify app was built by Stanley Hua and Derrick Hua.
 
-Fridgify is available to access ... (deployed via Vercel).
+Fridgify is available to access at [Link](https://fridgify-ae07ed975bfa.herokuapp.com/)... (deployed via Vercel).
 
 ## Screenshots
 
