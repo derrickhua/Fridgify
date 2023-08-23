@@ -23,12 +23,6 @@ async function index(req, res, next) {
     }
 }
 
-// GET: /reminders/create // this function is used to generate a create page
-// thats unnecessary
-async function createPage(req, res, next) {
-    return null
-};
-
 // POST: /reminders
 async function create(req, res, next) {
     try {
@@ -42,7 +36,7 @@ async function create(req, res, next) {
     }
 }
 
-// GET: /reminders/:id/edit // get specific Reminder
+
 async function update(req, res, next) {
   try {
     let updateItem = await Reminder.findByIdAndUpdate(req.params.id, req.body, {returnDocument:'after'})
@@ -55,7 +49,6 @@ async function update(req, res, next) {
   }
 }
 
-// POST: /reminders/:id/delete
 async function deleteReminder(req, res, next) {
   try {
     let deletedRem = await Reminder.findByIdAndDelete(req.params.id)

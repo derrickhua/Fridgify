@@ -15,10 +15,6 @@ const ReminderSchema = new Schema({
 })
 
 ReminderSchema.methods.requiresNotification = function(date) {
-    // this function checks the difference in time between reminders time, and the current time
-    // notification im guessing is how many minutes away from the event should the app notify you
-    // so instead of using as minutes, I will use as Day
-    // I will set the condition to run if 0 or 1
     return Math.round(moment.duration(moment(this.time).tz(this.timeZone).utc()
                             .diff(moment(date).utc())
                           ).asMinutes()) === this.notification;
