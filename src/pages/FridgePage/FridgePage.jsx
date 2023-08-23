@@ -13,9 +13,6 @@ export default function FridgePage({items, getItems}) {
     // const [deleteError, setDeleteError] = useState('')
     const [detailShow, setDetailShow] = useState(null)
     const [modalShow, setModalShow] = useState(false)
-    const [itemQueue, setItemQ] = useState([])
-    const [remQueue, setRemQueue] = useState([])
-
     const [tables, setTables] = useState([])
 
     
@@ -53,50 +50,6 @@ export default function FridgePage({items, getItems}) {
 
     }, [items])
 
-    useEffect(()=> {
-        let newQ = itemQueue
-        let recentEntry = newQ[newQ.length-1]
-        for (let i=newQ.length-2; i>=0; i--) {
-            let currentEntry = newQ[i]
-            if (currentEntry[0] === recentEntry[0]) {
-                if (Object.keys(currentEntry[1])[0] === Object.keys(recentEntry[1])[0])
-                newQ.splice(i, 1)
-            }
-        }
-        setItemQ(newQ)
-    }, [itemQueue])
-
-    useEffect(()=> {
-        let q= remQueue
-        let recentEntry = q[q.length-1]
-        for (let i=q.length-2; i>=0; i--) {
-            let currentEntry = q[i]
-            if (currentEntry[0] === recentEntry[0]) {
-                if (Object.keys(currentEntry[1])[0] === Object.keys(recentEntry[1])[0])
-                q.splice(i, 1)
-            }
-        }
-        setRemQueue(q)
-    }, [remQueue])
-
-    useEffect(()=> {
-        if (itemQueue.length) {
-            for (let query of itemQueue) {
-                itemAPI.updateItem(query[0], query[1])
-            }
-            setItemQ([])
-            getItems()            
-        }
-
-        if (remQueue.length) {
-            for (let query of remQueue) {
-                remAPI.updateRem(query[0], query[1])
-            }
-            setRemQueue([])
-            getItems()                
-        }
-
-    }, [detailShow])
 
     return (
         <>
@@ -107,7 +60,7 @@ export default function FridgePage({items, getItems}) {
                             gl={ {
                                 antialias: true,
                                 toneMapping: THREE.ACESFilmicToneMapping,
-                                // outputColorSpace: THREE.SRGBColorSpace
+                                outputColorSpace: THREE.SRGBColorSpace
                             } }
                             camera={ {
                                 position: [ 0, 0, 7 ]
@@ -120,8 +73,6 @@ export default function FridgePage({items, getItems}) {
                     <button className='addBtn' onClick={toggleItemForm}>ADD</button>
                     {modalShow && 
                     <ItemForm getItems={getItems} toggleItemForm={toggleItemForm} show={modalShow}/>}
-
-                    {/* {editItem && <ItemUpdateForm editItem={editItem} getItems={getItems} setEditItem={setEditItem} show={editItem}/>} */}
                 </div>
                 <div className="inventorySegment">
                 
@@ -150,9 +101,7 @@ export default function FridgePage({items, getItems}) {
                     detailShow && 
                     <>
                     <DetailComponent catName={detailShow.catName} category={detailShow.category} 
-                    setDetailShow={setDetailShow} deleteItems={deleteItems} getItems={getItems}
-                    setItemQ={setItemQ} itemQueue={itemQueue} remQueue={remQueue} setRemQueue={setRemQueue}
-                    />
+                    setDetailShow={setDetailShow} deleteItems={deleteItems} getItems={getItems}/>
                     </>
                 }
       

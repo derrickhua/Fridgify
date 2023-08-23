@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
-import Form from 'react-bootstrap/Form';
+import * as itemAPI from '../../utilities/itemsApi'
+import * as remAPI from '../../utilities/reminderApi'
 const moment = require('moment')
 const momentTimeZone = require('moment-timezone')
-export default function EditExpiryForm({item, itemQueue, setItemQ, remQueue, setRemQueue}) {
+export default function EditExpiryForm({item, getItems}) {
   const [d, setD] = useState(item.expiryDate)
 
   useEffect(()=> {
     if (d !== item.expiryDate) {
       let newRemTime = moment(new Date(d)).set('hour', 8).set('minute', 0).toDate()
-      setRemQueue([...remQueue, [item.reminder, {time: newRemTime}]])
-      setItemQ([...itemQueue, [item._id, {expiryDate: d}]])
+      remAPI.updateRem(item.reminder, {time: newRemTime})
+      itemAPI.updateItem(item._id, {expiryDate: d})
+      getItems()
     }
   }, [d])
 
