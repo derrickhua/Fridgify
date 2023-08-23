@@ -30,7 +30,8 @@ export default function RecipePage({items}) {
 
     return <>
       <h1>Recipe Page</h1>
-      <button onClick={recipes}>Generate Recipes for the ingredients you have!</button>
+      <p>Under Construction! Soon to be Available! Thank you for your patience!</p>
+      {/* <button onClick={recipes}>Generate Recipes for the ingredients you have!</button> */}
     
     </>;
   }
