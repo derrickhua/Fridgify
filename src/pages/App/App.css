@@ -91,8 +91,11 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     width: 100%;
     height: 30px;
     border: none;
-    border-bottom: 3px solid rgb(245,242,223);
+    border-bottom: 3px solid rgb(245,242,223);   
+}
 
+.inputFormat::placeholder {
+    color:#fff
 }
 
 .moreMargin {
@@ -109,7 +112,6 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     border:none;
     background-color: rgb(161,203,209);
     color: rgb(245,242,223);
-    margin-bottom: 120px;
 }
 
 .lessMargin {
@@ -509,3 +511,114 @@ src: url('../../../public/BodoniModa-VariableFont_opsz\,wght.ttf');
     max-width: 120px;
 }
 
+.showOnMobile {
+    display: none;
+}
+/* mobile area */
+
+@media only screen and (max-width: 600px) {
+
+    /* auth page */
+    .middleSegment {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hideOnMobile {
+        display: none;
+    }
+
+    .logoArea {
+        justify-content: center;
+        font-size: 7px;
+        margin-bottom: 0%;
+        height: fit-content;
+        padding: 35% 0% 0 0;
+    }
+
+    .smallerFont, .smallerFont > h2, .smallerFont > div, .smallerFont > p {
+        font-size: 13px;
+    }
+
+    .showOnMobile {
+        display: block;
+    }
+
+    .commercialSegment {
+        width: 100%;
+        padding: 0% 0 10% 0;
+
+    }
+
+    .authSegment {
+        width: 100%;
+        padding: 0%;
+    }
+
+    .formContainer {
+        width: 100%;
+        padding: 0%;
+    }
+    .authSegment > .formContainer {
+        border: none;
+    }
+
+    .inputFormat {
+        margin-top: 15px;
+        margin-bottom: 0px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .inputFormat::placeholder {
+        color: gray;
+        font-size: 20px;
+        padding: auto;
+    }
+
+    form {
+        padding: 0;
+    }
+
+    .mainButton {
+        margin-top: 15px;
+        border-radius: 3px;
+    }
+    .forgotPass {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .or {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .orGap {
+        margin: 0 15px;
+    }
+
+    .mobileBtn {
+        width: 50%;
+        border: 1px rgb(245,242,223) solid;
+        background-color: rgb(161,203,209);
+        color: rgb(245,242,223);
+        margin: 50px auto 0px auto;
+        padding: 8px 0px;
+        border-radius: 3px;
+        font-size: 13px;
+    }
+
+    .signUp {
+        margin-bottom: 10px;
+    }
+
+    .signUpBtn {
+        margin-bottom: 26px;
+    }
+
+
+
+
+
+}

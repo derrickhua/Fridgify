@@ -25,19 +25,27 @@ export default function AuthPage({setUser}) {
     return (
         <>
             <div className='logoArea'>
-              <img className='logo' src='../../fridgifylogo2.svg'/>
+              <img className='logo hideOnMobile' src='../../fridgifylogo2.svg'/>
               <h1 className='authPageTitle'>FRIDGIFY</h1>
             </div>
             <div className='middleSegment'>
 
             <div className='commercialSegment'>
               <div>
-                <h2>YOUR FOOD</h2>
-                <h2>MANAGEMENT APP</h2>
-                <br/>
+                <div className="hideOnMobile">
+                  <h2>YOUR FOOD</h2>
+                  <h2>MANAGEMENT APP</h2>
+                </div>
+                <div className="showOnMobile smallerFont">
+                  <p>Your food management app.</p>
+                </div>
 
-                <h4>Keep track of your food and find new recipes</h4>
-                <h4> using what you have in stock.</h4>                
+                <br className="hideOnMobile"/>
+
+                <div className="hideOnMobile">
+                  <h4>Keep track of your food and find new recipes</h4>
+                  <h4> using what you have in stock.</h4>                
+                </div>
               </div>
             </div>
             <div className='authSegment'>

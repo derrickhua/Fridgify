@@ -15,12 +15,9 @@ export default function FridgePage({items, getItems}) {
     const [modalShow, setModalShow] = useState(false)
     const [itemQueue, setItemQ] = useState([])
     const [remQueue, setRemQueue] = useState([])
-    // when itemQueue changes, look through it and delete itemQueues that have the same id and same object
+
     const [tables, setTables] = useState([])
 
-    // future? maybe?
-    // TODO: make useState for Accumulating Item Change Requests, low, med, high? 
-    // this gets to be confirmed if you leave category details page
     
     async function deleteItems([remId, classId]){
         try {

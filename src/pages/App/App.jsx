@@ -19,9 +19,11 @@ import './App.css';
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [items, setItems] = useState({})
+  const [unsortedItems, setUnsorted] = useState({})
 
   async function getItems() {
     const items = await itemAPI.getAll()
+    setUnsorted(items)
     let realitems = turnIntoCategories(items)
     setItems(realitems)
   }
@@ -58,7 +60,7 @@ export default function App() {
       <>
         <Routes>
           <Route path="/" element={<FridgePage items={items} getItems={getItems}/>} /> 
-          <Route path="/recipes" element={<RecipePage items={items}/>} /> 
+          <Route path="/recipes" element={<RecipePage items={unsortedItems}/>} /> 
           <Route path="/grocerylist" element={<RestockPage />} /> 
         </Routes>          
       </>

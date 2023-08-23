@@ -34,20 +34,30 @@ export default function LoginForm({ setUser, changeForm, showForm }) {
     <div className='formContainer'>
       <div className='loginForm'>
         <div>
-            <h5 className='noBotMargin'>Sign In</h5> 
-            <p >Enter your details below.</p>           
+            <h5 className='noBotMargin hideOnMobile'>Sign In</h5> 
+            <p className='hideOnMobile'>Enter your details below.</p>           
         </div>
 
         <div>
           <form autoComplete="off" onSubmit={handleSubmit}>
-            <label>Email</label><br />
-            <input className='inputFormat moreMargin' type="text" name="email" value={credentials.email} onChange={handleChange} required /><br />
-            <label>Password</label><br />
-            <input className='inputFormat' type="password" name="password" value={credentials.password} onChange={handleChange} required /><br />
-            <p className='buttonBegone moreMargin' onClick={changeForm}>{showForm.signUp ? 'Have an account? Sign in!' : 'No account? Sign up!'}</p><br />
-            <button className="mainButton" type="submit">SIGN IN</button>
+            <label className='hideOnMobile'>Email</label><br />
+            <input className='inputFormat moreMargin' type="text" name="email" placeholder="Email" value={credentials.email} onChange={handleChange} required />
+            <br className='hideOnMobile'/>
+            <label className='hideOnMobile'>Password</label><br />
+            <input className='inputFormat' type="password" name="password" placeholder="Password" value={credentials.password} onChange={handleChange} required />
+            <br className='hideOnMobile'/>
+            <p className='buttonBegone moreMargin hideOnMobile' onClick={changeForm}>{showForm.signUp ? 'Have an account? Sign in!' : 'No account? Sign up!'}</p>
+            <br />
+            <button className="mainButton" type="submit">Log In</button>
           </form>
+            <p className='forgotPass showOnMobile'>Forgot Password?</p>
         </div>
+            <span className='or showOnMobile'>
+            <img src='../../../bar.png' />
+            <span className='orGap'>or</span>
+            <img src='../../../bar.png' />
+            </span>
+            <button className='mobileBtn showOnMobile' onClick={changeForm}>{showForm.signUp ? 'Already have an account?' : 'Create new account'}</button>
         {error && <p className="error-message">&nbsp;{error}</p>}
       </div>
     </div>

@@ -38,25 +38,31 @@ export default function SignUpForm({setUser, changeForm, showForm}) {
     return (
       <div className='formContainer signUpFormContainer'>
           <div className="maxWidth">
-            <h5 className='noBotMargin'>Sign Up</h5> 
-            <p>Enter your details below.</p> 
+            <h5 className='noBotMargin hideOnMobile'>Sign Up</h5> 
+            <p className="hideOnMobile">Enter your details below.</p> 
 
             <div className="form-container">
               <form autoComplete="off" onSubmit={handleSubmit}>
-                <label>Name</label><br/>
-                <input className='inputFormat lowerMargin' type="text" name="name" value={suState.name} onChange={handleChange} required /><br/>
-                <label>Email</label><br/>
-                <input className='inputFormat lowerMargin' type="email" name="email" value={suState.email} onChange={handleChange} required /><br/>
-                <label>Phone Number</label><br/>
-                <input className='inputFormat lowerMargin' type="number" name="phoneNumber" value={suState.phoneNumber} onChange={handleChange} required /><br/>
-                <label>Password</label><br/>
-                <input className='inputFormat lowerMargin' type="password" name="password" value={suState.password} onChange={handleChange} required /><br/>
-                <label>Confirm Password</label><br/>
-                <input className='inputFormat ' type="password" name="confirm" value={suState.confirm} onChange={handleChange} required />
-                <p className='buttonBegone lessMargin' onClick={changeForm}>{showForm.signUp ? 'Have an account? Sign in!' : 'No account? Sign up!'}</p><br />
-                <button className="mainButton" type="submit" disabled={disable}>SIGN UP</button>
+                <label className='hideOnMobile'>Name</label><br className='hideOnMobile'/>
+                <input className='inputFormat lowerMargin signUp' type="text" name="name" placeholder="Name" value={suState.name} onChange={handleChange} required /><br/>
+                <label className='hideOnMobile'>Email</label><br className='hideOnMobile'/>
+                <input className='inputFormat lowerMargin signUp' type="email" name="email" placeholder="Email"value={suState.email} onChange={handleChange} required /><br/>
+                <label className='hideOnMobile'>Phone Number</label><br className='hideOnMobile'/>
+                <input className='inputFormat lowerMargin signUp' type="number" name="phoneNumber"placeholder="Phone Number" value={suState.phoneNumber} onChange={handleChange} required /><br/>
+                <label className='hideOnMobile'>Password</label><br className='hideOnMobile'/>
+                <input className='inputFormat lowerMargin signUp' type="password" name="password" placeholder="Password" value={suState.password} onChange={handleChange} required /><br/>
+                <label className='hideOnMobile'>Confirm Password</label><br className='hideOnMobile'/>
+                <input className='inputFormat signUp' type="password" name="confirm" placeholder="Password" value={suState.confirm} onChange={handleChange} required />
+                <p className='buttonBegone lessMargin hideOnMobile' onClick={changeForm}>{showForm.signUp ? 'Have an account? Sign in!' : 'No account? Sign up!'}</p><br />
+                <button className="mainButton signUpBtn" type="submit" disabled={disable}>Sign Up</button>
               </form>
             </div>
+            <span className='or showOnMobile'>
+              <img src='../../../bar.png' />
+              <span className='orGap'>or</span>
+              <img src='../../../bar.png' />
+            </span>
+            <button className='mobileBtn showOnMobile' onClick={changeForm}>{showForm.signUp ? 'Already have an account?' : 'Create new account'}</button>
             {error && <p className="error-message">&nbsp;{error}</p>}
           </div>
       </div>
