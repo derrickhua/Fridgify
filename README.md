@@ -7,8 +7,6 @@ Receive text notifications 1 day before your food expires!
 
 Future improvements coming such as new recipe generation using what you have!
 
-The Fridgify app was built by Stanley Hua and Derrick Hua.
-
 Fridgify is available to access at [Link](https://fridgify-ae07ed975bfa.herokuapp.com/)... (deployed via Vercel).
 
 ## Screenshots
